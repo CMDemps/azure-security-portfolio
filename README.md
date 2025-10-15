@@ -19,15 +19,15 @@ All work was built and validated within a live Azure tenant and documented using
 ## Repository Structure
 ```
 .
+├─ AZ-900/                → Azure Fundamentals labs
+│  ├─ Cloud Concepts/
+│  ├─ Architecture & Services/
+│  └─ Management & Governance/
 ├─ SC-200/                → Security Operations Analyst labs
 │  ├─ DefenderXDR/
 │  ├─ DefenderForCloud/
 │  ├─ Purview/
 │  └─ Sentinel/
-├─ AZ-900/                → Azure Fundamentals labs
-│  ├─ Cloud Concepts/
-│  ├─ Architecture & Services/
-│  └─ Management & Governance/
 └─ trackers/              → CSV progress trackers
 ```
 
