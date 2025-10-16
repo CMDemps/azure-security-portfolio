@@ -39,7 +39,6 @@ Configure a complete telemetry pipeline from an Azure Virtual Machine into Micro
 Heartbeat
 | where Computer == "win-soc-vm"
 | sort by TimeGenerated desc
-**KQL Verification (Updated for AMA Schema)**
 
 Event
 | summarize Count = count() by EventLog
