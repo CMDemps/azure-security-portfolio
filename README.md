@@ -17,6 +17,7 @@ All work was built and validated within a live Azure tenant and documented using
 ---
 
 ## Environment Overview
+
 All resources are deployed under:
 - **Resource Group:** `rg-sentinel-lab`
 - **Region:** West US 2
@@ -31,13 +32,28 @@ All resources are deployed under:
 ### Resource Tree
 rg-sentinel-lab
 ├─ linux-lab-vm (Ubuntu SOC VM)
-│ ├─ linux-vm-nic → vNet + NSG + Public IP
-│ ├─ dcr-westus2-linux-lab-vm → dce-westus2-sentinel
-│ └─ MSVMI-westus2-linux-lab-vm (VM Insights)
+│ ├─ linux-vm-nic
+│ │ ├─ linux-vm-pip (Public IP)
+│ │ ├─ linux-lab-vm-nsg (Network Security Group)
+│ │ └─ sentinel-lab-vnet (Virtual Network)
+│ ├─ linux-lab-vm_ssh (SSH Key)
+│ ├─ linux-lab-vm_disk0 / _DataDisk_0 (Managed Disks)
+│ └─ Monitoring
+│ ├─ MSVMI-westus2-linux-lab-vm (VM Insights Rule)
+│ ├─ dcr-westus2-linux-lab-vm (Custom Data Collection Rule)
+│ │ ├─ Syslog: auth, authpriv, syslog, daemon, kern, cron, user
+│ │ ├─ Perf Counters: CPU, Memory, Disk
+│ │ └─ Destination → dce-westus2-sentinel
+│ └─ dce-westus2-sentinel (Data Collection Endpoint)
+│
 ├─ law-westus-sentinel (Log Analytics Workspace)
-│ ├─ SecurityInsights(law-westus-sentinel)
-│ └─ SecurityCenterFree(law-westus-sentinel)
-└─ vault8634 / rgsentinellabperfdiag233 / sentinel-lab-db101325
+│ ├─ Connected Solutions:
+│ │ ├─ SecurityInsights(law-westus-sentinel) – Microsoft Sentinel
+│ │ └─ SecurityCenterFree(law-westus-sentinel) – Microsoft Defender for Cloud
+│
+├─ rgsentinellabperfdiag233 (Diagnostic Storage Account)
+├─ vault8634 (Recovery Services Vault)
+└─ sentinel-lab-db101325 (Shared Sentinel Dashboard)
 
 ---
 
