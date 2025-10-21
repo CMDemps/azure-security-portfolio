@@ -5,7 +5,7 @@
 **DCR Name:** `dcr-westus2-sentinel`  
 **Workspace:** `law-westus-sentinel`  
 **Endpoint:** `dce-westus2-sentinel`  
-**Virtual Machine:** `win-soc-vm`
+**Virtual Machine:** `linux-lab-vm`
 
 ---
 
@@ -25,7 +25,7 @@ Configure a complete telemetry pipeline from an Azure Virtual Machine into Micro
      - Windows Event Logs (Security, System, Application)
      - Performance Counters (CPU, Memory, Disk)
    - Destination: DCE `dce-westus2-sentinel` → `law-westus-sentinel`
-   - Assigned Resource: `win-soc-vm`
+   - Assigned Resource: `linux-lab-vm`
 
 3. **Installed Azure Monitor Agent (AMA)** on the VM  
    - Verified data flow via KQL `Heartbeat` and `Event` tables.
