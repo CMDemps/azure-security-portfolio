@@ -16,55 +16,59 @@ All work was built and validated within a live Azure tenant and documented using
 
 ---
 
+## Environment Overview
+All resources are deployed under:
+- **Resource Group:** `rg-sentinel-lab`
+- **Region:** West US 2
+- **Main VM:** `linux-lab-vm` (Ubuntu)
+- **Monitoring Stack:** Azure Monitor Agent (AMA), Data Collection Rule (DCR), Log Analytics Workspace (LAW), Microsoft Sentinel, Defender for Cloud
+
+---
+
+## Resource Topology
+![Azure SOC Topology](images/topology.png)
+
+### Resource Tree
+rg-sentinel-lab
+├─ linux-lab-vm (Ubuntu SOC VM)
+│ ├─ linux-vm-nic → vNet + NSG + Public IP
+│ ├─ dcr-westus2-linux-lab-vm → dce-westus2-sentinel
+│ └─ MSVMI-westus2-linux-lab-vm (VM Insights)
+├─ law-westus-sentinel (Log Analytics Workspace)
+│ ├─ SecurityInsights(law-westus-sentinel)
+│ └─ SecurityCenterFree(law-westus-sentinel)
+└─ vault8634 / rgsentinellabperfdiag233 / sentinel-lab-db101325
+
+---
+
 ## Repository Structure
-```
-.
-├─ AZ-900/                → Azure Fundamentals labs
-│  ├─ Cloud Concepts/
-│  ├─ Architecture & Services/
-│  └─ Management & Governance/
-├─ SC-200/                → Security Operations Analyst labs
-│  ├─ DefenderXDR/
-│  ├─ DefenderForCloud/
-│  ├─ Purview/
-│  └─ Sentinel/
-└─ trackers/              → CSV progress trackers
-```
+
+| Folder | Description |
+|--------|-------------|
+| `/AZ-900/` | Azure Fundamentals labs and architecture exercises |
+| `/SC-200/` | Microsoft Sentinel, Defender, and Purview security operations labs |
+| `/trackers/` | Certification progress tracking CSVs |
+| `/images/` | Diagrams, screenshots, KQL results |
 
 ---
 
-## Skills Demonstrated
-
-- **Security Operations:** Analytic rule creation, incident investigation, playbook automation  
-- **Cloud Defense:** Defender for Cloud CSPM & workload protection, Purview compliance workflows  
-- **Threat Hunting:** KQL queries, UEBA, ASIM normalization, Sentinel notebooks  
-- **Azure Administration:** VM deployment, networking, storage redundancy, cost and policy governance  
-- **Monitoring & Governance:** Azure Monitor, Workbooks, Budgets, and Policy enforcement
+## Technologies Used
+**Azure Services:** Microsoft Sentinel, Log Analytics, Defender for Cloud, Purview, App Services, Azure Monitor  
+**Security Focus:** Incident Detection, Threat Hunting, Automation Rules, SOC Monitoring  
+**Languages/Tools:** KQL, Bash, PowerShell, Python, Azure CLI, ARM Templates  
 
 ---
 
-## Documentation Approach
-Each module folder includes:
-- A concise **README.md** describing the lab’s goal and results  
-- Relevant **KQL queries**, **JSON exports**, and **screenshots**  
-- Any **metrics** or **reports** generated during the lab
+## Key Learning Outcomes
+- Configure Azure Monitor Agent and DCR for Linux Syslog ingestion  
+- Integrate Microsoft Sentinel with Defender for Cloud  
+- Develop and validate detection queries using KQL  
+- Automate alert triage and response with Sentinel playbooks  
 
 ---
 
-## Trackers
-You can monitor certification progress here:
-
-- [SC-200 Tracker](trackers/SC-200-Tracker.csv)  
-- [AZ-900 Tracker](trackers/AZ-900-Tracker.csv)
-
----
-
-## Notes
-- All sensitive tenant data has been sanitized.  
-- JSON templates and scripts are provided for reproducibility.  
-- Content will evolve as new labs and security tools are added.
-
----
-
+## Connect
+**LinkedIn:** [linkedin.com/in/claytondemps](https://linkedin.com/in/claytondemps)  
+**GitHub:** [github.com/CMDemps](https://github.com/CMDemps)
 **Created and maintained by Clayton Demps**  
 *Aspiring Security Operations Analyst | Azure & Microsoft Security Enthusiast*
