@@ -58,7 +58,8 @@ All resources are deployed under:
 ---
 
 ## Connect
-**LinkedIn:** [linkedin.com/in/claytondemps](https://linkedin.com/in/claytondemps)  
+**LinkedIn:** [linkedin.com/in/clayton-demps-19a894171](https://www.linkedin.com/in/clayton-demps-19a894171/) 
 **GitHub:** [github.com/CMDemps](https://github.com/CMDemps)
+
 **Created and maintained by Clayton Demps**  
 *Aspiring Security Operations Analyst | Azure & Microsoft Security Enthusiast*
