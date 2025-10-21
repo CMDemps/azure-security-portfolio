@@ -36,7 +36,7 @@ It combines Microsoft Learn modules, hands-on Azure labs, and resource deploymen
 |-----------|-------------|
 | Azure Resource Group Overview | ![RG Overview](../images/rg-sentinel-lab.png) |
 | Linux VM Overview | ![VM Overview](../images/linux-lab-vm.png) |
-| App Service Overview | ![App Service](../images/app-service.png) |
+| App Service Overview | ![App Service](../images/webapp-live-demo.png) |
 | Cost Management Blade | ![Cost Management](../images/cost-management.png) |
 
 ---
