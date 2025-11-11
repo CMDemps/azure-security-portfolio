@@ -8,7 +8,7 @@ This file collects KQL hunts and detection queries you can promote to **Analytic
 ```kql
 SecurityEvent
 | where EventID == 4625
-| summarize attempts=count(), ip=tostring(IpAddress) by Account=tostring(TargetUserName), bin(TimeGenerated, 15m)
+| summarize attempts=count(), ip=make_set(IpAddress) by Account=tostring(TargetUserName), bin(TimeGenerated, 15m)
 | where attempts > 10
 | order by attempts desc
 ```
