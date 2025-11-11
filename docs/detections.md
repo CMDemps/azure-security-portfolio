@@ -40,7 +40,7 @@ DeviceNetworkEvents
 
 ---
 
-## 4) Rare New Services (Persistance)
+## 4) Rare New Services (Persistence)
 ```kql
 Sysmon
 | where EventID in (7045, 13)
