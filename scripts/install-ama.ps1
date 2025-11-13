@@ -34,6 +34,6 @@ if (Test-Path $mmaHelper) {
   Write-Warning "Legacy MMA helper not found. If this fails to onboard, use Azure Arc + DCR to associate AMA with your LAW."
 }
 
-Write-Host "[✓] AMA install complete. Verify ingestion in Sentinel:"
+Write-Host "    AMA install complete. Verify ingestion in Sentinel:"
 Write-Host "    - SecurityEvent | take 10"
 Write-Host "    - Sysmon | take 10"
