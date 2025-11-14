@@ -25,7 +25,7 @@ Windows Host (Azure Portal) → Windows Victim VM (Sysmon + AMA) → Log Analyti
   ├─ Windows Victim VM  -> Sysmon + Azure Monitor Agent -> Log Analytics Workspace -> Microsoft Sentinel
   └─ Kali Attacker VM    -> Simulates attacks (brute-force, LOLBAS, lateral movement)
 ```
-
+* You can find an image of the lab architecture in `docs/lab-architecture.md` or `images/rg-sc200-lab-topology.png` for a better view.
 ---
 
 ## Repository Structure
