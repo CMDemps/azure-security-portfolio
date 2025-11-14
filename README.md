@@ -19,9 +19,9 @@ This repository is my hands-on Azure Security / SOC portfolio built to practice 
 
 ## Architecture
 ```rust
-Windows Host (VirtualBox) → Windows Victim VM (Sysmon + AMA) → Log Analytics Workspace → Microsoft Sentinel → Investigator (host or Azure Portal).
+Windows Host (Azure Portal) → Windows Victim VM (Sysmon + AMA) → Log Analytics Workspace → Microsoft Sentinel → Investigator (host or Azure Portal).
 
-[VirtualBox Host]
+[Azure Portal Host]
   ├─ Windows Victim VM  -> Sysmon + Azure Monitor Agent -> Log Analytics Workspace -> Microsoft Sentinel
   └─ Kali Attacker VM    -> Simulates attacks (brute-force, LOLBAS, lateral movement)
 ```
