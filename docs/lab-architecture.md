@@ -27,7 +27,7 @@ This environment allows me to:
 
 Below is the topology of my SC-200 lab environment:
 
-![SC-200 Lab Topology](../images/rg-sc200-lab-topology.png)
+![SC-200 Lab Topology](../images/rg-sc200-lab.png)
 
 ---
 
