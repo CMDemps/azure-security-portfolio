@@ -1,5 +1,5 @@
 # Azure Security Operations Lab Architecture
-This document provides a complete architectural overview of my Azure-based SC-200 (Microsoft Security Operations Analyst) home lab.  
+This document provides a complete architectural overview of my Azure-based Security Operations home lab.  
 It is designed to demonstrate real-world SOC workflows, including data collection, threat detection, attack simulation, KQL hunting, incident response, and SOAR automation.
 
 ---
