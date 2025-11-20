@@ -1,128 +1,179 @@
-# Azure Security Portfolio — SC-200 / SOC Analyst Lab
+# 🛡️ Azure Cloud Security Portfolio  
+### *DevSecOps • Cloud Security Engineering • Threat Detection*
 
-This repository is my hands-on Azure Security / SOC portfolio built to practice Microsoft Sentinel, KQL hunting, incident triage, and endpoint telemetry collection. It contains reproducible lab artifacts (scripts, KQL detections, exported workbooks, and sanitized screenshots) that demonstrate real SOC workflows you can run in a local VirtualBox + Azure environment.
-
-**Credits**  
-*Sysmon baseline config: SwiftOnSecurity (used as baseline in scripts)*  
-
----
-
-## Why This Repo?
-* Demonstrates end-to-end security operations: log collection → detection → investigation → response.
-* Targets skills measured by Microsoft SC-200 (Microsoft Sentinel, KQL, investigations).
-* Reproducible: scripts and step-by-step notes let you recreate the lab in your Azure subscription and on local VMs.
-
-**Note**  
-*Actively updating repo with new files and tools to allow for practice with a variety of defensive tools in a Microsoft Azure environment.*
+![Azure](https://img.shields.io/badge/Azure-0078D4?style=for-the-badge&logo=microsoftazure&logoColor=white)
+![Bicep](https://img.shields.io/badge/Bicep-3A76F0?style=for-the-badge&logo=azurepipelines&logoColor=white)
+![Terraform](https://img.shields.io/badge/Terraform-623CE4?style=for-the-badge&logo=terraform&logoColor=white)
+![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white)
+![KQL](https://img.shields.io/badge/KQL-4682B4?style=for-the-badge)
+![Security](https://img.shields.io/badge/Security-000000?style=for-the-badge&logo=datadog&logoColor=white)
+![Status](https://img.shields.io/badge/Status-In_Progress-yellow?style=for-the-badge)
 
 ---
 
-## Architecture
-```rust
-Windows Host (Azure Portal) → Windows Victim VM (Sysmon + AMA) → Log Analytics Workspace → Microsoft Sentinel → Investigator (host or Azure Portal).
+Hi! I'm **Clayton** — a security analyst focused on **Azure Cloud Security**, **DevSecOps automation**, and **cloud threat detection engineering**.
 
-[Azure Portal Host]
-  ├─ Windows Victim VM  -> Sysmon + Azure Monitor Agent -> Log Analytics Workspace -> Microsoft Sentinel
-  └─ Kali Attacker VM    -> Simulates attacks (brute-force, LOLBAS, lateral movement)
+This portfolio showcases real, hands-on work across:
+
+- 🔐 Cloud security engineering  
+- ⚙️ DevSecOps pipelines (secure CI/CD)  
+- 🕵️ Cloud threat detection & KQL analytics  
+- 🏗 Infrastructure-as-Code (Bicep/Terraform)  
+- 📊 Security automation & governance  
+
+All projects are designed to run inside a **student Azure subscription**, making them reproducible and accessible.
+
+---
+
+# 🧭 Navigation
+
+- [🚨 Project A – Cloud Threat Detection Lab](#-project-a--cloud-threat-detection-lab)  
+- [🏗 Project B – Azure Landing Zone Lite](#-project-b--azure-landing-zone-lite-infrastructure-as-code)  
+- [⚙ Project C – DevSecOps Pipelines](#-project-c--devsecops-pipelines)  
+- [🧰 Tech Stack](#-tech-stack)  
+- [🌟 Highlights](#-highlights)  
+- [📁 Repository Structure](#-repository-structure)  
+
+---
+
+# 🧰 Tech Stack
+
+| Area | Technologies |
+|------|--------------|
+| ☁️ **Cloud** | Azure, Entra ID, Defender for Cloud, Log Analytics |
+| 🏗 **IaC** | Bicep, Terraform, ARM |
+| 🔄 **DevSecOps** | GitHub Actions, OIDC, CodeQL, tfsec, Checkov |
+| 🖥 **Systems** | Windows, Linux, Sysmon, AMA |
+| 🔍 **Detection** | KQL, MITRE ATT&CK |
+| 🔐 **Security** | NSGs, Key Vault, Zero Trust concepts |
+
+---
+
+# 🌟 Highlights
+
+- ⭐ Built a full cloud threat detection lab using Sysmon + Log Analytics  
+- ⭐ Developed 20+ KQL detections mapped to MITRE ATT&CK  
+- ⭐ Created secure IaC deployments using Bicep & Terraform  
+- ⭐ Implemented DevSecOps pipelines with CodeQL, tfsec & Checkov  
+- ⭐ Automated Azure deployments using GitHub Actions + OIDC (no secrets!)  
+- ⭐ Architected a "Landing Zone Lite" blueprint for student subscriptions  
+
+---
+
+# 🚨 Project A — Cloud Threat Detection Lab  
+**Location:** `/detections` and `/docs`
+
+A hands-on Advanced Cloud Detection Engineering environment featuring:
+
+- Azure Log Analytics Workspace  
+- Sysmon/AMA ingestion  
+- KQL-based detections  
+- MITRE ATT&CK-aligned threat scenarios  
+- Full analysis writeups & graphs  
+
+## 🔍 Included Detection Scenarios
+- Brute-force login attacks  
+- Suspicious PowerShell/LOLBin usage  
+- Process anomalies  
+- Key Vault access anomalies  
+- VM metadata exploitation patterns  
+- Lateral movement techniques  
+
+## 📄 Featured Case Studies
+- **Lab 01 — Brute Force Detection**  
+- **Lab 02 — Suspicious Process Trees (LOLBAS)**  
+- `detections/detections.md` — Detection Pack  
+
+---
+
+# 🏗 Project B — Azure Landing Zone Lite (Infrastructure-as-Code)  
+**Location:** `/infra`
+
+A minimal, secure Azure Landing Zone designed for restricted tenants.
+
+### 🔐 Includes:
+- VNet + segmented subnets (App, Mgmt, Logging)  
+- NSGs with least-privilege rules  
+- Windows/Linux VMs  
+- Key Vault  
+- Diagnostic settings → LAW  
+- Resource Group architecture  
+
+### 🧱 IaC Available In:
+- `/infra/bicep/` (Bicep modules)  
+- `/infra/terraform/` (Terraform alternative)  
+
+### 📘 Architecture Diagram (Mermaid)
+```mermaid
+flowchart TD
+    A[Landing Zone Lite] --> B[VNet]
+    B --> C[Subnets]
+    C --> D[App Subnet]
+    C --> E[Mgmt Subnet]
+    C --> F[Logging Subnet]
+    A --> G[Key Vault]
+    A --> H[Log Analytics Workspace]
+    E --> I[Windows/Linux VMs]
+    I --> H
 ```
-* You can find an image of the lab architecture in `docs/lab-architecture.md` or `images/rg-sc200-lab-topology.png` for a better view.
+
 ---
 
-## Repository Structure
-```javascript
+# ⚙ Project C — DevSecOps Pipelines
+**Location:** `/pipelines`
+
+Secure CI/CD pipelines for automated infrastructure deployment.
+
+### 🔧 Includes:
+- IaC linting & validation
+- IaC security scanning (Checkov, tfsec)
+- CodeQL static analysis
+- Container image scanning
+- Secure Azure login with GitHub OIDC
+- Automated deploys of Bicep/Terraform
+- (Planned) Policy-as-Code & drift detection
+
+### 📘 Pipeline Diagram
+```mermaid
+flowchart LR
+    A[Developer Commit] --> B[GitHub Actions]
+    B --> C{Security Scans}
+    C -->|tfsec| D[Terraform/Bicep Validation]
+    C -->|CodeQL| E[Static Code Analysis]
+    C -->|Trivy| F[Container Scan]
+    D --> G[Azure OIDC Login]
+    G --> H[Deploy Infrastructure]
+    H --> I[Landing Zone Lite]
+```
+
+---
+
+# 📁 Repository Structure
+
+<details>
+  <summary><strong>Click to expand</strong></summary>
+
+```
 azure-security-portfolio/
-├─ docs/                   → KQL detections, playbooks, notes
-├─ scripts/                → install-sysmon.ps1, install-ama.ps1 (lab helpers)
-├─ screenshots/            → dated, sanitized screenshots of experiments
-├─ workbooks/              → exported Sentinel Workbook JSON
-└─ README.md               → this file
+├─ detections/
+│   ├─ detections.md
+│   └─ samples/
+│
+├─ docs/
+│   ├─ lab-01-bruteforce-detection.md
+│   ├─ lab-02-process-anomaly.md
+│   └─ images/
+│
+├─ infra/
+│   ├─ bicep/
+│   ├─ terraform/
+│   └─ docs/
+│       └─ landing-zone-architecture.md
+│
+├─ pipelines/
+│   ├─ workflows/
+│   └─ docs/
+│
+└─ images/
 ```
----
-
-## Quick Start — reproduce the core lab (minimal steps)
-_Important: Do not commit workspace keys or tenant secrets to the repo. Use placeholders and pass secrets to scripts at runtime._
-1. **Create** a Log Analytics Workspace (LAW) in your Azure subscription.
-2. **Enable** Microsoft Sentinel on the LAW.
-3. On the **Windows Victim VM** (running in VirtualBox on your host):
-   - Copy `scripts/install-sysmon.ps1` to the VM and run as Administrator:
-   
-     ```powershell
-     Set-ExecutionPolicy Bypass -Scope Process -Force
-     .\install-sysmon.ps1
-     ```
-     
-   - Then install the Azure Monitor Agent (AMA) and associate the VM with your LAW (run as **Administrator** and pass your workspace details):
-     ```powershell
-     Set-ExecutionPolicy Bypass -Scope Process -Force
-     .\install-ama.ps1 -WorkspaceId "<YOUR-LAW-ID>" -WorkspaceKey "<YOUR-LAW-PRIMARY-KEY>"
-     ```
-     
-   - If your tenant supports Azure Arc, prefer onboarding via Azure Arc + Data Collection Rule (DCR) instead of the legacy workspace key flow.
-
-4. **Verify Ingestion** in Sentinel (Logs):
-   
-    ```kql
-    SecurityEvent | take 10
-    Sysmon | take 10
-    ```
-
-5. Use the KQL hunts in `docs/detections.md` to build Analytics rules, workbooks, and incidents.
-
----
-
-## Useful KQL Hunts (examples)
-
-_See `docs/detections.md` for the complete pack._
-
-### Failed logon brute-force (sample)
-
-```kql
-SecurityEvent
-| where EventID == 4625
-| summarize Attempts=count(), IP=tostring(IpAddress) by TargetAccount=tostring(TargetUserName), bin(TimeGenerated, 15m)
-| where Attempts > 10
-| order by Attempts desc
-```
-
-### Suspicious parent→child (LOLBAS)
-
-```kql
-Sysmon
-| where EventID == 1
-| where ParentImage has_any ("regsvr32.exe","rundll32.exe","mshta.exe","powershell.exe")
-| project TimeGenerated, Computer, ParentImage, Image, CommandLine, Account
-```
-
----
-
-## Demonstrated Skills
-
-* Log collection & telemetry: Sysmon, Windows Event collection, AMA, Arc (optional).
-* KQL hunting: detection queries, triage, and pivoting.
-* SOAR basics: scheduled analytics rules and simple playbooks (workbook examples included).
-* Investigation workflow: evidence timelines, entity enrichment and containment strategy.
-* Documentation discipline: reproducible scripts, sanitized screenshots, exported workbooks.
-
----
-
-## Security & Privacy Notes
-
-* All screenshots in screenshots/ are sanitized. Do not commit tenant IDs, keys, or PII.
-* VM images, VHDs, or other large binary artifacts are excluded (.gitignore contains VM patterns). Use Git LFS only for recordings if necessary.
-
----
-
-## Next Steps / Roadmap
-
-* Add SOAR playbooks for automated containment & ticketing.
-* Add Active Directory attack lab (offline BloodHound export and AD detection rules).
-* Publish a GitHub Pages gallery for sanitized screenshots and workbook walk-throughs.
-
----
-
-## Connect
-**LinkedIn:** [linkedin.com/in/clayton-demps-19a894171](https://www.linkedin.com/in/clayton-demps-19a894171/)  
-**GitHub:** [github.com/CMDemps](https://github.com/CMDemps)
-
-**Created and Maintained by Clayton Demps**  
-*Aspiring Security Operations Analyst | Azure & Microsoft Security Enthusiast*
+</details>
