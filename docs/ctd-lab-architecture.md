@@ -1,11 +1,11 @@
-# Azure Security Operations Lab Architecture
-This document provides a complete architectural overview of my Azure-based Security Operations home lab.  
-It is designed to demonstrate real-world SOC workflows, including data collection, threat detection, attack simulation, KQL hunting, incident response, and SOAR automation.
+# Cloud Threat Detection Lab Architecture
+This document provides a complete architectural overview of my Azure-based Cloud Threate Detection home lab.  
+It is designed to demonstrate real-world SOC-like workflows, including data collection, threat detection, attack simulation, KQL hunting, incident response, and SOAR automation.
 
 ---
 
 # 1. Lab Purpose & Goals
-The purpose of this lab is to build an end-to-end Azure security operations environment using only:
+The purpose of this lab is to build an end-to-end Azure Cloud Threat Detection environment using only:
 - A **student subscription** (with limited Entra ID permissions)
 - A **single Windows VM** as a monitored endpoint
 - **Microsoft Sentinel**, **Log Analytics**, **Sysmon**, and **Azure Monitor Agent**
@@ -13,19 +13,19 @@ The purpose of this lab is to build an end-to-end Azure security operations envi
 
 ### Core Learning Objectives
 This environment allows me to:
-- Practice SC-200 skills without needing full Azure AD (Entra ID) rights
+- Practice Threat Detection skills without needing full Azure AD (Entra ID) rights
 - Generate **real telemetry** (Sysmon, Windows Events, Security Events)
 - Configure **custom Sentinel analytics rules**
 - Perform **attack simulations** on my VM
 - Write and run **KQL hunting queries**
 - Build **playbooks (SOAR)**
-- Investigate alerts end-to-end like a SOC analyst
+- Investigate alerts end-to-end like a Security Analyst
 
 ---
 
 # 2. High-Level Architecture Diagram
 
-Below is the topology of my SC-200 lab environment:
+Below is the topology of my Cloud Threat Detection lab environment:
 
 ![SC-200 Lab Topology](../images/rg-sc200-lab-topology.png)
 
@@ -118,8 +118,6 @@ The following tables are currently active in Log Analytics:
 | **UpdateSummary** | Windows Update | Patch detection |
 | **AzureActivity** (optional) | Subscription logs | Admin operations (if allowed by tenant) |
 
-This combination gives enough data to run **SC-200-level detections and KQL hunting**.
-
 ---
 
 # 6. Limitations of Azure for Students (and How the Lab Works Around Them)
@@ -136,14 +134,11 @@ Since this lab uses Azure for Students inside a university tenant, I cannot:
 - Focus on Sysmon + Windows logs (very SC-200 relevant)
 - Perform attack simulations locally on the VM
 - Use Sentinel for custom analytics rules
-- Use Logic Apps for SOAR (email alerts + API enrichment)
 - Leverage Threat Intelligence feeds (public TI)
-
-This still covers **80–85% of the SC-200 exam**.
 
 ---
 
-# 7. SC-200 Skills This Architecture Supports
+# 7. Skills This Architecture Supports
 
 ### Configure Microsoft Sentinel  
 - Connect data sources  
@@ -161,12 +156,7 @@ This still covers **80–85% of the SC-200 exam**.
 - Sysmon sequences  
 - Parent-child anomalies  
 - Rare process hunts  
-- Threat intel matching  
-
-### Automate Response (SOAR)  
-- Create Logic App playbooks  
-- Alert-to-email workflow  
-- IP lookup via VirusTotal  
+- Threat intel matching    
 
 ### Unavailable Topics (due to Student Subscription)  
 - Defender for Identity  
@@ -179,27 +169,7 @@ The lab compensates for this with deeper **endpoint + SIEM + KQL** focus.
 
 ---
 
-# 8. Planned Future Enhancements
-
-### Add a Linux VM (Syslog + AuditD telemetry)
-Enables SSH brute force + KQL hunts.
-
-### Enable NSG Flow Logs (if supported)
-Useful for:
-- Port scans  
-- Data exfil detection  
-- Unusual outbound traffic  
-
-### Add SOAR automation
-- Auto-enrich alerts  
-- Auto-create GitHub issues  
-- Auto-block IPs at NSG layer  
-
-These enhancements will be documented in future sections of the portfolio.
-
----
-
-# 📌 9. Diagram: Data Flow Summary
+# 9. Diagram: Data Flow Summary
 
 ```text
 [Attacker Actions]
@@ -218,24 +188,16 @@ These enhancements will be documented in future sections of the portfolio.
     - Analytics Rules
     - Incidents
     - Hunting
-    - Workbooks
-    - SOAR (Logic Apps)
 ```
 
 ---
 
 # 10. Conclusion
 
-This lab architecture establishes a **production-style SOC environment** within the constraints of an Azure for Students subscription.
-
-It enables me to practice and demonstrate:
-- Cloud-native incident response  
+It enables me to practice and demonstrate:  
 - Detection engineering  
 - Attack simulation  
 - KQL analytics  
-- End-to-end Sentinel investigations  
-- SOAR automation  
-
-This architecture is the foundation for all future documentation in this portfolio, including detections, threat simulations, investigations, and playbooks.
+- End-to-end Sentinel investigations
 
 ---
