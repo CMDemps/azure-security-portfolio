@@ -6,8 +6,8 @@
 3. Installed Azure Monitor Agent (AMA) on the Windows victim VM.
 4. Connected Windows Security Events and Sysmon (Operational) channel.
 5. Verified ingestion with:
-   - `SecurityEvent | take 10`
-   - `Sysmon | take 10`
+   - `WindowsEvent | take 10`
+   - `Event | take 10`
 
 ## Screenshot list
 - 01-law-created.png
