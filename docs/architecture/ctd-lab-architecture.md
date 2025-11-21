@@ -59,23 +59,23 @@ This document describes the architecture of my **Azure Cloud Threat Detection La
 
 ```mermaid
 flowchart TD
-    subgraph RG["rg-sc200-lab (RG)"]
-      VM["VM : vm-win-sc200-lab"]
-      DiskOS["OS Disk"]
-      DiskData["Data Disk"]
+    subgraph RG["RG : rg-sc200-lab"]
+      VM("VM : vm-win-sc200-lab")
+      DiskOS[("OS Disk")]
+      DiskData[("Data Disk")]
       NIC["NIC : vm-win-sc200-lab894"]
-      VNet["VNet : northcentralus"]
-      NSG["NSG : vm-win-sc200-lab"]
-      PIP["Public IP"]
-      LAW["LAW : law-sc200-lab"]
-      DCR1["DCR : win-event"]
-      DCR2["DCR : insights"]
-      SENT["Sentinel Workspace"]
+      VNet{{"VNet : northcentralus"}}
+      NSG{{"NSG : vm-win-sc200-lab"}}
+      PIP(["Public IP"])
+      LAW[("LAW : law-sc200-lab")]
+      DCR1{{"DCR : AMA"}}
+      DCR2{{"DCR : insights"}}
+      SENT{"Sentinel Workspace"}
     end
 
-    Attacker((Attacker)) --> PIP
+    Attacker(((Attacker))) --> PIP
     PIP --> NIC --> VM
-    NIC --> NSG --> VNet
+    NIC --- NSG --- VNet
 
     VM -->|Telemetry| DCR1 --> LAW
     VM -->|Telemetry| DCR2 --> LAW
@@ -91,7 +91,7 @@ flowchart TD
    - AMA forwards Security + Sysmon logs based on DCRs.
      
 **3. DCRs → Log Analytics**
-   - Events normalized into ```Event``` / ```WindowsEvent``` tables.
+   - Events normalized into `Event` / `WindowsEvent` tables.
      
 **4. Sentinel → Detection & Investigation**
    - Analytics rules run on LAW data (e.g., RDP brute force, LOLBAS).
