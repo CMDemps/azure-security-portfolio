@@ -24,8 +24,8 @@ Each detection includes:
 - [Lateral Movement (TA0008)](#lateral-movement-ta0008)
 - [Defense Evasion (TA0005)](#defense-evasion-ta0005)
 - [Persistence (TA0003)](#persistence-ta0003)
-- [Exfiltration (TA0010)](#exfiltration-ta0010)
-- [Impact (TA0040)](#impact-ta0040)
+- [Exfiltration (TA0010)](#exfiltration-ta0010)  --> Coming Soon
+- [Impact (TA0040)](#impact-ta0040)              --> Coming Soon
 
 ---
 
