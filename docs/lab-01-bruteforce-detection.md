@@ -1,5 +1,6 @@
 # 🧪 Lab 01 — Detecting RDP Brute Force Attacks in Azure  
-### Cloud Threat Detection Case Study — Azure Security Portfolio
+
+## Cloud Threat Detection Case Study — Azure Security Portfolio
 
 ---
 
@@ -19,7 +20,7 @@ The goal is to simulate a realistic RDP brute-force attempt and validate that th
 
 ---
 
-# 🏗️ Lab Environment
+## 🏗️ Lab Environment
 
 | Component | Purpose |
 |----------|---------|
@@ -31,12 +32,14 @@ The goal is to simulate a realistic RDP brute-force attempt and validate that th
 
 ---
 
-# 🎯 Attack Scenario
+## 🎯 Attack Scenario
 
 ### Goal  
+
 Simulate repeated failed RDP authentication attempts under a short time window.
 
-### Why it matters  
+#### Why it matters  
+
 Repeated failures may indicate:
 
 - Credential stuffing  
@@ -44,16 +47,18 @@ Repeated failures may indicate:
 - Targeted brute-force attacks  
 - Misconfigured automated systems  
 
-### MITRE ATT&CK  
+#### MITRE ATT&CK  
+
 | Tactic | Technique | ID |
 |--------|-----------|----|
 | Credential Access | Brute Force | **T1110** |
 
 ---
 
-# 🚀 Simulation Steps
+## 🚀 Simulation Steps
 
 ### Option A — Manual  
+
 1. Attempt RDP login using an incorrect username.  
 2. Attempt RDP login using an incorrect password.  
 3. Repeat 10–20 times quickly.
@@ -63,21 +68,27 @@ Repeated failures may indicate:
 ```bash
 hydra -l Administrator -P /usr/share/wordlists/rockyou.txt rdp://<TARGET-IP>
 ```
+
 - RDP Attempts generate LogonType 10
 
 ---
 
-# 📥 Log Ingestion
+## 📥 Log Ingestion
+
 The following events were sent to Log Analytics:
+
 ### Windows Security Logs (via AMA)
+
 - Event ID 4625 — Failed logon
   - Includes TargetUser, LogonType, Workstation, SourceIp via ParameterXml parsing
 
-### Sysmon (optional)
+#### Sysmon (optional)
+
 - Event ID 3 — Network connections
 - Event ID 1 — Process creation
 
-### Flow
+#### Flow
+
 ```mermaid
 flowchart LR
     A[Windows VM] --> B[AMA Agent]
@@ -88,8 +99,10 @@ flowchart LR
 
 ---
 
-# 🛡️ Detection: Sentinel Analytics Rule
+## 🛡️ Detection: Sentinel Analytics Rule
+
 ### RDP Brute Force Detection (Event Table)
+
 This rule is actively enabled in Microsoft Sentinel.
 
 **Severity**: High
@@ -120,7 +133,7 @@ Event
 | where FailedCount >= 5
 ```
 
-# 🧠 What This Rule Detects
+## 🧠 What This Rule Detects
 
 - High volume of failed login attempts
 - Attempts targeting the same user
@@ -131,9 +144,10 @@ Event
 
 ---
 
-# 🕵️ Investigation Workflow
+## 🕵️ Investigation Workflow
 
 ### 1. Identify attacker IP
+
 ```kql
 Event
 | where EventID == 4625
@@ -142,10 +156,12 @@ Event
 ```
 
 ### 2. Validate attack method
+
 - ```LogonType = 10``` → RDP
 - ```LogonType = 3``` → remote/network logon
 
 ### 3. Extract failure reasons
+
 ```kql
 Event
 | where EventID == 4625
@@ -154,6 +170,7 @@ Event
 ```
 
 ### 4. Look for successful logon after failed attempts
+
 ```kql
 Event
 | where EventID == 4624
@@ -163,15 +180,17 @@ Event
 ### 5. Check Sysmon (optional)
 
 Look for:
+
 - Suspicious processes
 - Unusual child processes
 - Lateral movement behavior
 
 ---
 
-# 📊 Results
+## 📊 Results
 
 During testing:
+
 - 11 failed attempts occurred within 5 minutes
 - Attempts originated from a single external IP
 - ```LogonType 10``` confirmed RDP-based brute force
@@ -180,7 +199,7 @@ During testing:
 
 ---
 
-# 🚨 Example Alert Summary
+## 🚨 Example Alert Summary
 
 **Alert:** RDP Brute Force Detection (Event Table)
 **Attacker IP:** X.X.X.X
@@ -191,20 +210,22 @@ During testing:
 
 ---
 
-# ⚠️ False Positive Considerations
+## ⚠️ False Positive Considerations
 
 - Users typing incorrect passwords
 - Automated scripts reconnecting
 - Misconfigured services
 - IT testing credentials
+
 ### Reducing noise
+
 - Exclude service accounts
 - Exclude known IP ranges
 - Raise threshold (e.g., >10)
 
 ---
 
-# 🛡️ Mitigation Recommendations
+## 🛡️ Mitigation Recommendations
 
 - Restrict RDP via NSG or Azure Firewall
 - Use Azure Bastion instead of public RDP
@@ -215,7 +236,7 @@ During testing:
 
 ---
 
-# 💡 Skills Demonstrated
+## 💡 Skills Demonstrated
 
 - KQL detection engineering
 - Sentinel analytics rule creation
