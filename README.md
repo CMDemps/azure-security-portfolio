@@ -160,20 +160,26 @@ azure-security-portfolio/
 │   └─ samples/
 │
 ├─ docs/
+│   ├─ architecture/
+│   │   ├─ cloud-detection-architecture.md
+│   │   └─ landing-zone-architecture.md
 │   ├─ lab-01-bruteforce-detection.md
 │   ├─ lab-02-process-anomaly.md
 │   └─ images/
+│       ├─ brute-force-diagram.png
+│       ├─ detection-flow.png
+│       ├─ landing-zone.png
+│       └─ pipeline-architecture.png
 │
 ├─ infra/
 │   ├─ bicep/
 │   ├─ terraform/
 │   └─ docs/
-│       └─ landing-zone-architecture.md
 │
 ├─ pipelines/
 │   ├─ workflows/
 │   └─ docs/
 │
-└─ images/
+└─ PORTFOLIO-INDEX.md
 ```
 </details>
