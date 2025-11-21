@@ -32,7 +32,8 @@ A complete cloud detection engineering environment using:
 ### 🔗 Key Files  
 - **Case Study 01:** [RDP Brute Force Detection](docs/lab-01-bruteforce-detection.md)  
 - **Case Study 02:** Suspicious Process Tree (coming soon)  
-- **Detection Pack:** [`detections.md`](detections/detections.md)  
+- **Detection Pack:** [`detections.md`](detections/detections.md)
+- **Architecture:** [`ctd-lab-architecture.md`](docs/architecture/ctd-lab-architecture.md)
 
 ### 🧠 Skills Demonstrated  
 - Cloud threat detection engineering  
@@ -63,7 +64,7 @@ A secure, minimal Azure Landing Zone that can be deployed in an Azure Student Su
 - [`/infra/terraform`](infra/terraform/) — Terraform (optional)  
 
 ### 📘 Documentation  
-- [`landing-zone-architecture.md`](infra/docs/landing-zone-architecture.md)  
+- [`landing-zone-architecture.md`](docs/architecture/landing-zone-architecture.md)  
 
 ### 🧠 Skills Demonstrated  
 - Azure network design  
@@ -89,7 +90,7 @@ Security-integrated CI/CD pipelines using GitHub Actions + Azure OIDC.
 - Automated Bicep/Terraform deployments  
 
 ### 📘 Documentation  
-- [`infra-deploy-pipeline.md`](pipelines/docs/infra-deploy-pipeline.md)  
+- [`infra-deploy-pipeline.md`](docs/architecture/infra-deploy-pipeline.md)  
 
 ### 🧠 Skills Demonstrated  
 - DevSecOps workflow design  
