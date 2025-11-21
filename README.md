@@ -51,12 +51,12 @@ All projects are designed to run inside a **student Azure subscription**, making
 
 # 🌟 Highlights
 
-- ⭐ Built a full cloud threat detection lab using Sysmon + Log Analytics  
-- ⭐ Developed 20+ KQL detections mapped to MITRE ATT&CK  
-- ⭐ Created secure IaC deployments using Bicep & Terraform  
-- ⭐ Implemented DevSecOps pipelines with CodeQL, tfsec & Checkov  
-- ⭐ Automated Azure deployments using GitHub Actions + OIDC (no secrets!)  
-- ⭐ Architected a "Landing Zone Lite" blueprint for student subscriptions  
+- Built a full cloud threat detection lab using Sysmon + Log Analytics  
+- Developed 20+ KQL detections mapped to MITRE ATT&CK  
+- Created secure IaC deployments using Bicep & Terraform  
+- Implemented DevSecOps pipelines with CodeQL, tfsec & Checkov  
+- Automated Azure deployments using GitHub Actions + OIDC (no secrets!)  
+- Architected a "Landing Zone Lite" blueprint for student subscriptions  
 
 ---
 
