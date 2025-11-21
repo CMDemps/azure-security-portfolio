@@ -1,12 +1,13 @@
-# 📘 Azure Security Portfolio — Project Index  
-### DevSecOps • Cloud Security Engineering • Threat Detection
+# 📘 Azure Security Portfolio — Project Index
+
+*DevSecOps • Cloud Security Engineering • Threat Detection*
 
 This page serves as a central index for all major projects within my **Azure Cloud Security Portfolio**.  
 Each project demonstrates hands-on skills aligned with **Azure Security Engineer (AZ-500)**, **Cybersecurity Architect (SC-100)**, and **real cloud detection engineering** practices.
 
 ---
 
-# 🧭 Project Overview
+## 🧭 Project Overview
 
 | Project | Focus Area | Status |
 |--------|------------|--------|
@@ -16,7 +17,8 @@ Each project demonstrates hands-on skills aligned with **Azure Security Engineer
 
 ---
 
-# 🚨 Project A — Cloud Threat Detection Lab  
+## 🚨 Project A — Cloud Threat Detection Lab
+
 **Folder:** [`/detections`](detections/) & [`/docs`](docs/)
 
 A complete cloud detection engineering environment using:
@@ -29,13 +31,15 @@ A complete cloud detection engineering environment using:
 - MITRE ATT&CK mapping  
 - Investigation case studies  
 
-### 🔗 Key Files  
+### 🔗 Key Files
+
 - **Case Study 01:** [RDP Brute Force Detection](docs/lab-01-bruteforce-detection.md)  
 - **Case Study 02:** Suspicious Process Tree (coming soon)  
 - **Detection Pack:** [`detections.md`](detections/detections.md)
 - **Architecture:** [`ctd-lab-architecture.md`](docs/architecture/ctd-lab-architecture.md)
 
-### 🧠 Skills Demonstrated  
+### 🧠 Skills Demonstrated
+
 - Cloud threat detection engineering  
 - KQL analytics  
 - Sysmon + AMA log analysis  
@@ -45,12 +49,14 @@ A complete cloud detection engineering environment using:
 
 ---
 
-# 🏗️ Project B — Azure Landing Zone Lite  
+## 🏗️ Project B — Azure Landing Zone Lite
+
 **Folder:** [`/infra`](infra/)
 
 A secure, minimal Azure Landing Zone that can be deployed in an Azure Student Subscription using **Infrastructure-as-Code**.
 
-### 🔐 Components  
+### 🔐 Components
+
 - Resource Groups  
 - VNet + Subnets (App / Mgmt / Logging)  
 - NSGs with least privilege rules  
@@ -59,14 +65,17 @@ A secure, minimal Azure Landing Zone that can be deployed in an Azure Student Su
 - Diagnostic settings  
 - Hardened Windows/Linux VMs  
 
-### 📦 IaC Implementations  
+### 📦 IaC Implementations
+
 - [`/infra/bicep`](infra/bicep/) — Bicep Modules  
 - [`/infra/terraform`](infra/terraform/) — Terraform (optional)  
 
-### 📘 Documentation  
+### 📘 Documentation
+
 - [`landing-zone-architecture.md`](docs/architecture/landing-zone-architecture.md)  
 
-### 🧠 Skills Demonstrated  
+### 🧠 Skills Demonstrated
+
 - Azure network design  
 - Zero Trust segmentation (Lite model)  
 - Resources-as-Code  
@@ -75,12 +84,14 @@ A secure, minimal Azure Landing Zone that can be deployed in an Azure Student Su
 
 ---
 
-# ⚙️ Project C — DevSecOps Pipelines  
+## ⚙️ Project C — DevSecOps Pipelines
+
 **Folder:** [`/pipelines`](pipelines/)
 
 Security-integrated CI/CD pipelines using GitHub Actions + Azure OIDC.
 
-### 🔧 Pipeline Features  
+### 🔧 Pipeline Features
+
 - IaC linting  
 - IaC security scanning (Checkov / tfsec)  
 - CodeQL static analysis  
@@ -89,10 +100,12 @@ Security-integrated CI/CD pipelines using GitHub Actions + Azure OIDC.
 - GitHub OIDC → Azure (No secrets)  
 - Automated Bicep/Terraform deployments  
 
-### 📘 Documentation  
+### 📘 Documentation
+
 - [`infra-deploy-pipeline.md`](docs/architecture/infra-deploy-pipeline.md)  
 
-### 🧠 Skills Demonstrated  
+### 🧠 Skills Demonstrated
+
 - DevSecOps workflow design  
 - GitHub Actions automation  
 - Security gates in CI/CD  
@@ -101,28 +114,32 @@ Security-integrated CI/CD pipelines using GitHub Actions + Azure OIDC.
 
 ---
 
-# 🧩 Future Enhancements
+## 🧩 Future Enhancements
 
-### 🔄 For Detection Lab  
+### 🔄 For Detection Lab
+
 - Additional MITRE-aligned detections  
 - Behavioral analytics Notebook  
 - Sentinel-as-Code export (if tenant permits)
 
-### 🛡 For Landing Zone  
+### 🛡 For Landing Zone
+
 - Azure Firewall / NSG Flow Logs  
 - Azure Bastion integration  
 - DCR (Data Collection Rule) automation  
 
-### 🔧 For DevSecOps  
+### 🔧 For DevSecOps
+
 - Drift detection & compliance pipeline  
 - Azure Policy-as-Code  
 - Automated workbook deployment  
 
 ---
 
-# 📫 Contact  
+## 📫 Contact
+
 If you'd like to discuss cloud security engineering, DevSecOps, or detection engineering:
 
-**LinkedIn:** linkedin.com/in/claytondemps
+**LinkedIn:** <linkedin.com/in/claytondemps>
 
 ---
