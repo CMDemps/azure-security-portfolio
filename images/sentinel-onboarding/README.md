@@ -19,4 +19,4 @@
 ## Notes
 - Secrets and tenant IDs redacted.
 - Screens sanitized of PII where applicable.
-- See `docs/detections.md` for the KQL used in validation.
+- See `detections/detections.md` for the KQL used in validation.
