@@ -88,6 +88,10 @@ A hands-on Advanced Cloud Detection Engineering environment featuring:
 - **Lab 02 — Suspicious Process Trees (LOLBAS)**  
 - `detections/detections.md` — Detection Pack  
 
+### 📘 Architecture Diagram
+
+ - You can find the Cloud Detection lab architecture in `/docs/architecture/ctd-lab-architecture.md` to get the full picture  
+   
 ---
 
 ## 🏗 Project B — Azure Landing Zone Lite (Infrastructure-as-Code)
