@@ -1,70 +1,127 @@
-# Portfolio Index – SC-200 & AZ-900
+# 📘 Azure Security Portfolio — Project Index  
+### DevSecOps • Cloud Security Engineering • Threat Detection
 
-Quick links to all documented labs and exercises within this portfolio.
-
----
-
-## SC-200 – Microsoft Security Operations Analyst
-
-### Defender XDR
-- [Intro to Defender XDR](SC-200/DefenderXDR/01-Intro-XDR/README.md)
-- [Incident Management & Response](SC-200/DefenderXDR/02-Incident-Response/README.md)
-- [Defender for Office 365](SC-200/DefenderXDR/03-Defender-O365/README.md)
-- [Microsoft Entra Identity Protection](SC-200/DefenderXDR/04-Entra-Identity-Protection/README.md)
-- [Defender for Identity](SC-200/DefenderXDR/05-Defender-Identity/README.md)
-- [Defender for Cloud Apps](SC-200/DefenderXDR/06-Defender-Cloud-Apps/README.md)
-
-### Defender for Cloud
-- [Plan for Cloud Workload Protections](SC-200/DefenderForCloud/01-Planning/README.md)
-- [Connect Azure Assets](SC-200/DefenderForCloud/02-Azure-Connections/README.md)
-- [Connect Non-Azure Resources](SC-200/DefenderForCloud/03-Hybrid-Connections/README.md)
-- [Cloud Security Posture Management (CSPM)](SC-200/DefenderForCloud/04-CSPM/README.md)
-- [Cloud Workload Protections](SC-200/DefenderForCloud/05-Workload-Protections/README.md)
-- [Alert Remediation](SC-200/DefenderForCloud/06-Alert-Remediation/README.md)
-
-### Microsoft Purview
-- [Data Loss Prevention (DLP) Alerts](SC-200/Purview/01-DLP-Alerts/README.md)
-- [Insider Risk Management](SC-200/Purview/02-Insider-Risk/README.md)
-- [Audit Logs](SC-200/Purview/03-Audit-Logs/README.md)
-- [eDiscovery Cases](SC-200/Purview/04-eDiscovery/README.md)
-
-### Microsoft Sentinel
-- [Analytics Rules](SC-200/Sentinel/01-Analytics/README.md)
-- [Automation Rules](SC-200/Sentinel/02-Automation-Rules/README.md)
-- [Playbooks](SC-200/Sentinel/03-Playbooks/README.md)
-- [Incident Management](SC-200/Sentinel/04-Incident-Management/README.md)
-- [Behavioral Analytics](SC-200/Sentinel/05-Behavioral-Analytics/README.md)
-- [Data Normalization (ASIM)](SC-200/Sentinel/06-Data-Normalization/README.md)
-- [Visualizations & Workbooks](SC-200/Sentinel/07-Visualization/README.md)
-- [Content Management](SC-200/Sentinel/08-Content-Management/README.md)
-- [Threat Hunting – Concepts](SC-200/Sentinel-Hunting/01-Threat-Hunting-Concepts/README.md)
-- [Threat Hunting – Bookmarks & Livestream](SC-200/Sentinel-Hunting/02-Manual-Hunting/README.md)
-- [Threat Hunting – Search Jobs](SC-200/Sentinel-Hunting/03-Search-Jobs/README.md)
-- [Threat Hunting – Notebooks](SC-200/Sentinel-Hunting/04-Notebooks/README.md)
+This page serves as a central index for all major projects within my **Azure Cloud Security Portfolio**.  
+Each project demonstrates hands-on skills aligned with **Azure Security Engineer (AZ-500)**, **Cybersecurity Architect (SC-100)**, and **real cloud detection engineering** practices.
 
 ---
 
-## AZ-900 – Microsoft Azure Fundamentals
+# 🧭 Project Overview
 
-### Describe Cloud Concepts
-- [Cloud Computing](AZ-900/01-Cloud-Computing/README.md)
-- [Benefits of Cloud Services](AZ-900/02-Cloud-Benefits/README.md)
-- [Cloud Service Types (IaaS, PaaS, SaaS)](AZ-900/03-Service-Types/README.md)
-
-### Describe Azure Architecture & Services
-- [Core Architectural Components](AZ-900/04-Core-Architecture/README.md)
-- [Compute & Networking Services](AZ-900/05-Compute-Networking/README.md)
-- [Storage Services](AZ-900/06-Storage/README.md)
-- [Identity, Access & Security](AZ-900/07-Identity-Security/README.md)
-
-### Describe Azure Management & Governance
-- [Cost Management](AZ-900/08-Cost-Management/README.md)
-- [Governance & Compliance Tools](AZ-900/09-Governance-Compliance/README.md)
-- [Resource Management Tools](AZ-900/10-Resource-Management/README.md)
-- [Monitoring Tools](AZ-900/11-Monitoring/README.md)
+| Project | Focus Area | Status |
+|--------|------------|--------|
+| **Project A — Cloud Threat Detection Lab** | KQL detections, Sysmon, Sentinel, MITRE ATT&CK | 🟩 Active |
+| **Project B — Azure Landing Zone Lite** | Secure cloud architecture (IaC: Bicep/Terraform) | 🟨 In Progress |
+| **Project C — DevSecOps Pipelines** | CI/CD security, OIDC, Checkov, tfsec, CodeQL | 🟨 In Progress |
 
 ---
 
-## Trackers
-- [SC-200 Tracker (CSV)](trackers/SC-200-Tracker.csv)
-- [AZ-900 Tracker (CSV)](trackers/AZ-900-Tracker.csv)
+# 🚨 Project A — Cloud Threat Detection Lab  
+**Folder:** [`/detections`](detections/) & [`/docs`](docs/)
+
+A complete cloud detection engineering environment using:
+
+- Azure Log Analytics Workspace  
+- Azure Monitor Agent (AMA)  
+- Windows Security Event Logs (Event Table)  
+- Sysmon (optional)  
+- KQL-based detections  
+- MITRE ATT&CK mapping  
+- Investigation case studies  
+
+### 🔗 Key Files  
+- **Case Study 01:** [RDP Brute Force Detection](docs/lab-01-bruteforce-detection.md)  
+- **Case Study 02:** Suspicious Process Tree (coming soon)  
+- **Detection Pack:** [`detections.md`](detections/detections.md)  
+
+### 🧠 Skills Demonstrated  
+- Cloud threat detection engineering  
+- KQL analytics  
+- Sysmon + AMA log analysis  
+- MITRE ATT&CK alignment  
+- Sentinel analytics rule creation  
+- Investigation & triage workflow  
+
+---
+
+# 🏗️ Project B — Azure Landing Zone Lite  
+**Folder:** [`/infra`](infra/)
+
+A secure, minimal Azure Landing Zone that can be deployed in an Azure Student Subscription using **Infrastructure-as-Code**.
+
+### 🔐 Components  
+- Resource Groups  
+- VNet + Subnets (App / Mgmt / Logging)  
+- NSGs with least privilege rules  
+- Key Vault  
+- Log Analytics Workspace  
+- Diagnostic settings  
+- Hardened Windows/Linux VMs  
+
+### 📦 IaC Implementations  
+- [`/infra/bicep`](infra/bicep/) — Bicep Modules  
+- [`/infra/terraform`](infra/terraform/) — Terraform (optional)  
+
+### 📘 Documentation  
+- [`landing-zone-architecture.md`](infra/docs/landing-zone-architecture.md)  
+
+### 🧠 Skills Demonstrated  
+- Azure network design  
+- Zero Trust segmentation (Lite model)  
+- Resources-as-Code  
+- Secure VM deployment  
+- Cloud architecture diagramming  
+
+---
+
+# ⚙️ Project C — DevSecOps Pipelines  
+**Folder:** [`/pipelines`](pipelines/)
+
+Security-integrated CI/CD pipelines using GitHub Actions + Azure OIDC.
+
+### 🔧 Pipeline Features  
+- IaC linting  
+- IaC security scanning (Checkov / tfsec)  
+- CodeQL static analysis  
+- Secret scanning  
+- Container image scanning (Trivy)  
+- GitHub OIDC → Azure (No secrets)  
+- Automated Bicep/Terraform deployments  
+
+### 📘 Documentation  
+- [`infra-deploy-pipeline.md`](pipelines/docs/infra-deploy-pipeline.md)  
+
+### 🧠 Skills Demonstrated  
+- DevSecOps workflow design  
+- GitHub Actions automation  
+- Security gates in CI/CD  
+- Scanning: IaC, code, containers  
+- Secure cloud deployment automation  
+
+---
+
+# 🧩 Future Enhancements
+
+### 🔄 For Detection Lab  
+- Additional MITRE-aligned detections  
+- Behavioral analytics Notebook  
+- Sentinel-as-Code export (if tenant permits)
+
+### 🛡 For Landing Zone  
+- Azure Firewall / NSG Flow Logs  
+- Azure Bastion integration  
+- DCR (Data Collection Rule) automation  
+
+### 🔧 For DevSecOps  
+- Drift detection & compliance pipeline  
+- Azure Policy-as-Code  
+- Automated workbook deployment  
+
+---
+
+# 📫 Contact  
+If you'd like to discuss cloud security engineering, DevSecOps, or detection engineering:
+
+**LinkedIn:** linkedin.com/in/claytondemps
+
+---
