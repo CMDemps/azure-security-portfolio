@@ -1,5 +1,6 @@
-# 🛡️ Azure Cloud Security Portfolio  
-### *DevSecOps • Cloud Security Engineering • Threat Detection*
+# 🛡️ Azure Cloud Security Portfolio
+
+*DevSecOps • Cloud Security Engineering • Threat Detection*
 
 ![Azure](https://img.shields.io/badge/Azure-0078D4?style=for-the-badge&logo=microsoftazure&logoColor=white)
 ![Bicep](https://img.shields.io/badge/Bicep-3A76F0?style=for-the-badge&logo=azurepipelines&logoColor=white)
@@ -25,7 +26,7 @@ All projects are designed to run inside a **student Azure subscription**, making
 
 ---
 
-# 🧭 Navigation
+## 🧭 Navigation
 
 - [🚨 Project A – Cloud Threat Detection Lab](#-project-a--cloud-threat-detection-lab)  
 - [🏗 Project B – Azure Landing Zone Lite](#-project-b--azure-landing-zone-lite-infrastructure-as-code)  
@@ -36,7 +37,7 @@ All projects are designed to run inside a **student Azure subscription**, making
 
 ---
 
-# 🧰 Tech Stack
+## 🧰 Tech Stack
 
 | Area | Technologies |
 |------|--------------|
@@ -49,7 +50,7 @@ All projects are designed to run inside a **student Azure subscription**, making
 
 ---
 
-# 🌟 Highlights
+## 🌟 Highlights
 
 - Built a full cloud threat detection lab using Sysmon + Log Analytics  
 - Developed 20+ KQL detections mapped to MITRE ATT&CK  
@@ -60,7 +61,8 @@ All projects are designed to run inside a **student Azure subscription**, making
 
 ---
 
-# 🚨 Project A — Cloud Threat Detection Lab  
+## 🚨 Project A — Cloud Threat Detection Lab
+
 **Location:** `/detections` and `/docs`
 
 A hands-on Advanced Cloud Detection Engineering environment featuring:
@@ -71,7 +73,8 @@ A hands-on Advanced Cloud Detection Engineering environment featuring:
 - MITRE ATT&CK-aligned threat scenarios  
 - Full analysis writeups & graphs  
 
-## 🔍 Included Detection Scenarios
+### 🔍 Included Detection Scenarios
+
 - Brute-force login attacks  
 - Suspicious PowerShell/LOLBin usage  
 - Process anomalies  
@@ -79,19 +82,22 @@ A hands-on Advanced Cloud Detection Engineering environment featuring:
 - VM metadata exploitation patterns  
 - Lateral movement techniques  
 
-## 📄 Featured Case Studies
+### 📄 Featured Case Studies
+
 - **Lab 01 — Brute Force Detection**  
 - **Lab 02 — Suspicious Process Trees (LOLBAS)**  
 - `detections/detections.md` — Detection Pack  
 
 ---
 
-# 🏗 Project B — Azure Landing Zone Lite (Infrastructure-as-Code)  
+## 🏗 Project B — Azure Landing Zone Lite (Infrastructure-as-Code)
+
 **Location:** `/infra`
 
 A minimal, secure Azure Landing Zone designed for restricted tenants.
 
-### 🔐 Includes:
+### 🔐 Includes
+
 - VNet + segmented subnets (App, Mgmt, Logging)  
 - NSGs with least-privilege rules  
 - Windows/Linux VMs  
@@ -99,11 +105,13 @@ A minimal, secure Azure Landing Zone designed for restricted tenants.
 - Diagnostic settings → LAW  
 - Resource Group architecture  
 
-### 🧱 IaC Available In:
+### 🧱 IaC Available In
+
 - `/infra/bicep/` (Bicep modules)  
 - `/infra/terraform/` (Terraform alternative)  
 
 ### 📘 Architecture Diagram (Mermaid)
+
 ```mermaid
 flowchart TD
     A[Landing Zone Lite] --> B[VNet]
@@ -119,12 +127,14 @@ flowchart TD
 
 ---
 
-# ⚙ Project C — DevSecOps Pipelines
+## ⚙ Project C — DevSecOps Pipelines
+
 **Location:** `/pipelines`
 
 Secure CI/CD pipelines for automated infrastructure deployment.
 
-### 🔧 Includes:
+### 🔧 Includes
+
 - IaC linting & validation
 - IaC security scanning (Checkov, tfsec)
 - CodeQL static analysis
@@ -134,6 +144,7 @@ Secure CI/CD pipelines for automated infrastructure deployment.
 - (Planned) Policy-as-Code & drift detection
 
 ### 📘 Pipeline Diagram
+
 ```mermaid
 flowchart LR
     A[Developer Commit] --> B[GitHub Actions]
@@ -148,12 +159,12 @@ flowchart LR
 
 ---
 
-# 📁 Repository Structure
+## 📁 Repository Structure
 
 <details>
   <summary><strong>Click to expand</strong></summary>
 
-```
+```text
 azure-security-portfolio/
 ├─ detections/
 │   ├─ detections.md
@@ -182,4 +193,5 @@ azure-security-portfolio/
 │
 └─ PORTFOLIO-INDEX.md
 ```
+
 </details>
