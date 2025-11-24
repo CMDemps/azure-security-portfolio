@@ -1,7 +1,7 @@
 
-# 🛡️ Case Study 2 — Incident Response Report  
+# 🛡️ Case Study 2 — Suspicious Process Creation  
 ## **Suspicious PowerShell Downloader (Security 4688)**  
-**File:** `lab-02-incident-response.md`  
+**File:** `lab-02-process-creation.md`  
 **Status:** Completed  
 
 ---
@@ -160,8 +160,6 @@ For this lab:
 |--------|-----------|
 | **Execution (TA0002)** | T1059 – Command Interpreter |
 | **Execution** | T1059.001 – PowerShell |
-| **Command & Control** | T1105 – Ingress Tool Transfer |
-| **Defense Evasion** | T1027 – Obfuscated/Encoded Commands |
 
 ---
 
@@ -170,6 +168,4 @@ This incident demonstrates:
 - How Sentinel detects malicious PowerShell downloader activity  
 - How analysts triage process creation telemetry  
 - How to perform full IR workflow from alert → investigation → containment  
-
-This case study serves as a polished example of cloud SOC investigation methodology in your **Azure Security Portfolio**.
 
