@@ -84,41 +84,71 @@ Event
 
 ## ⚙ Execution (TA0002)
 
-### Suspicious PowerShell Execution (PS-LOLBAS / Recon Tooling)
+### Suspicious PowerShell Downloader / Stager (PS-LOLBAS / Payload Delivery)
 
-**Status:** ⏳ Pending Case Study 2
+**Status:** ✔ Implemented as Sentinel Analytics Rule  
+**File:** `lab-02-process-creation.md`
 
 #### 🎯 Purpose
 
-Detect suspicious PowerShell usage consistent with recon, LOLBAS abuse, or
-malicious script execution.
+Detect malicious or suspicious use of PowerShell as a downloader or stager, including retrieval of remote payloads, execution of downloaded content, abuse of `Invoke-WebRequest`, WebClient methods, BITS, encoded commands, or in-memory execution techniques often used during initial access and hands-on-keyboard activity.
+
+This detection is built on `Windows Security Event ID 4688` collected through AMA.
 
 #### 🗂 Log Sources
 
-- ```Event``` (PowerShell Operational logs if enabled)
-- ```Sysmon``` Event ID 1
+- ```Event``` (Security Log — EventID 4688: Process Creation)
 
-#### 📘 KQL (Template)
+#### 📘 KQL (Security 4688 - AMA)
 
 ```kql
-Sysmon
-| where EventID == 1
-| where Process has "powershell.exe"
-| extend Cmd = CommandLine
-| where Cmd matches regex @"(DownloadString|Invoke-WebRequest|IEX|Hidden|Bypass)"
-| project TimeGenerated, Computer, User, Process, Cmd
+Event
+| where EventLog == "Security"
+| where EventID == 4688   // Process creation
+// Extract process + command line from Security 4688
+| extend NewProcessName =
+    extract(@"New Process Name:\s*([^\r\n]+)", 1, RenderedDescription),
+         ProcessCommandLine =
+    extract(@"Process Command Line:\s*([^\r\n]*)", 1, RenderedDescription)
+// Normalize
+| extend NewProcessNameLower = tolower(NewProcessName),
+         CmdLower            = tolower(ProcessCommandLine)
+// Focus on PowerShell
+| where NewProcessNameLower has @"\powershell.exe"
+// Behavioral indicators of download/staging
+| where CmdLower has_any (
+    "http://", "https://",
+    "invoke-webrequest", "iwr",
+    "downloadstring", "downloadfile",
+    "new-object net.webclient",
+    "start-bitstransfer", "bitsadmin",
+    "frombase64string", "-encodedcommand",
+    "iex "
+)
+// Final projection
+| project
+    TimeGenerated,
+    Computer,
+    NewProcessName,
+    ProcessCommandLine
+| order by TimeGenerated desc
 ```
 
 #### 🧩 MITRE Mapping
 
 - **Technique:** T1059 — Command and Scripting Interpreter
 - **Sub-technique:** PowerShell (T1059.001)
+- **Related:**
+  - T1105 — Ingress Tool Transfer
+  - T1059.001 — Encoded or Obfuscated PowerShell
+  - T1027 — Obfuscated Execution
 
 #### ⚠️ Notes / False Positives
 
-- Legitimate admin automation
-- Monitoring scripts  
-- Scheduled tasks
+- Legitimate scripts using Invoke-WebRequest (updates, internal automation)
+- DevOps pipelines or software installers pulling content from URLs
+- Admin activities using BITS or WebClient APIs
+- Base64/Encoded commands used for benign automation (rare)
 
 ---
 
