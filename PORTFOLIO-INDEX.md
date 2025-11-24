@@ -34,7 +34,7 @@ A complete cloud detection engineering environment using:
 ### 🔗 Key Files
 
 - **Case Study 01:** [RDP Brute Force Detection](docs/lab-01-bruteforce-detection.md)  
-- **Case Study 02:** [Suspicious Process Creation](docs/labs-01-process-creation.md)  
+- **Case Study 02:** [Suspicious Process Creation](docs/lab-02-process-creation.md)  
 - **Detection Pack:** [`detections.md`](detections/detections.md)
 - **Architecture:** [`ctd-lab-architecture.md`](docs/architecture/ctd-lab-architecture.md)
 
