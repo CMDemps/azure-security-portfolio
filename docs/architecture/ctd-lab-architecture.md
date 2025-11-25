@@ -84,18 +84,22 @@ flowchart TD
 
 ## 🔍 Data Flow
 
-**1. Attacker → VM**
-   - RDP, PowerShell, LOLBAS execution, etc.
-     
-**2. VM → Log Collection**
-   - AMA forwards Security + Sysmon logs based on DCRs.
-     
-**3. DCRs → Log Analytics**
-   - Events normalized into `Event` / `WindowsEvent` tables.
-     
-**4. Sentinel → Detection & Investigation**
-   - Analytics rules run on LAW data (e.g., RDP brute force, LOLBAS).
-   - Alerts become incidents with mapped entities (Host, Account, Process).
+### 1. Attacker → VM
+
+- RDP, PowerShell, LOLBAS execution, etc.
+
+### 2. VM → Log Collection
+
+- AMA forwards Security + Sysmon logs based on DCRs.
+
+### 3. DCRs → Log Analytics
+
+- Events normalized into `Event` / `WindowsEvent` tables.
+
+### 4. Sentinel → Detection & Investigation
+
+- Analytics rules run on LAW data (e.g., RDP brute force, LOLBAS).
+- Alerts become incidents with mapped entities (Host, Account, Process).
 
 ## 🔧 Planned Enhancements
 
