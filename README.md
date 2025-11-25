@@ -1,6 +1,6 @@
 # 🛡️ Azure Cloud Security Portfolio
 
-*DevSecOps • Cloud Security Engineering • Threat Detection*
+## DevSecOps • Cloud Security Engineering • Threat Detection
 
 ![Azure](https://img.shields.io/badge/Azure-0078D4?style=for-the-badge&logo=microsoftazure&logoColor=white)
 ![Bicep](https://img.shields.io/badge/Bicep-3A76F0?style=for-the-badge&logo=azurepipelines&logoColor=white)
@@ -90,8 +90,8 @@ A hands-on Advanced Cloud Detection Engineering environment featuring:
 
 ### 📘 Architecture Diagram
 
- - You can find the Cloud Detection lab architecture in `/docs/architecture/ctd-lab-architecture.md` to get the full picture  
-   
+- You can find the Cloud Detection lab architecture in `/docs/architecture/ctd-lab-architecture.md` to get the full picture  
+
 ---
 
 ## 🏗 Project B — Azure Landing Zone Lite (Infrastructure-as-Code)
@@ -165,8 +165,7 @@ flowchart LR
 
 ## 📁 Repository Structure
 
-<details>
-  <summary><strong>Click to expand</strong></summary>
+Repository structure (expanded view):
 
 ```text
 azure-security-portfolio/
