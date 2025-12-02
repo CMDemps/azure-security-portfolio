@@ -16,11 +16,11 @@ Hi! I'm **Clayton** — a security analyst focused on **Azure Cloud Security**, 
 
 This portfolio showcases real, hands-on work across:
 
-- 🔐 Cloud security engineering  
-- ⚙️ DevSecOps pipelines (secure CI/CD)  
-- 🕵️ Cloud threat detection & KQL analytics  
-- 🏗 Infrastructure-as-Code (Bicep/Terraform)  
-- 📊 Security automation & governance  
+- Cloud security engineering  
+- DevSecOps pipelines (secure CI/CD)  
+- Cloud threat detection & KQL analytics  
+- Infrastructure-as-Code (Bicep/Terraform)  
+- Security automation & governance  
 
 All projects are designed to run inside a **student Azure subscription**, making them reproducible and accessible.
 
@@ -37,7 +37,7 @@ All projects are designed to run inside a **student Azure subscription**, making
 
 ---
 
-## 🧰 Tech Stack
+## Tech Stack
 
 | Area | Technologies |
 |------|--------------|
@@ -73,7 +73,7 @@ A hands-on Advanced Cloud Detection Engineering environment featuring:
 - MITRE ATT&CK-aligned threat scenarios  
 - Full analysis writeups & graphs  
 
-### 🔍 Included Detection Scenarios
+### Included Detection Scenarios
 
 - Brute-force login attacks  
 - Suspicious PowerShell/LOLBin usage  
@@ -82,13 +82,13 @@ A hands-on Advanced Cloud Detection Engineering environment featuring:
 - VM metadata exploitation patterns  
 - Lateral movement techniques  
 
-### 📄 Featured Case Studies
+### Featured Case Studies
 
 - **Lab 01 — Brute Force Detection**  
 - **Lab 02 — Suspicious Process Trees (LOLBAS)**  
 - `detections/detections.md` — Detection Pack  
 
-### 📘 Architecture Diagram
+### Architecture Diagram
 
 - You can find the Cloud Detection lab architecture in `/docs/architecture/ctd-lab-architecture.md` to get the full picture  
 
@@ -100,7 +100,7 @@ A hands-on Advanced Cloud Detection Engineering environment featuring:
 
 A minimal, secure Azure Landing Zone designed for restricted tenants.
 
-### 🔐 Includes
+### Includes
 
 - VNet + segmented subnets (App, Mgmt, Logging)  
 - NSGs with least-privilege rules  
@@ -109,12 +109,12 @@ A minimal, secure Azure Landing Zone designed for restricted tenants.
 - Diagnostic settings → LAW  
 - Resource Group architecture  
 
-### 🧱 IaC Available In
+### IaC Available In
 
 - `/infra/bicep/` (Bicep modules)  
 - `/infra/terraform/` (Terraform alternative)  
 
-### 📘 Architecture Diagram (Mermaid)
+### Architecture Diagram (Mermaid)
 
 ```mermaid
 flowchart TD
@@ -137,7 +137,7 @@ flowchart TD
 
 Secure CI/CD pipelines for automated infrastructure deployment.
 
-### 🔧 Includes
+### Includes
 
 - IaC linting & validation
 - IaC security scanning (Checkov, tfsec)
@@ -147,7 +147,7 @@ Secure CI/CD pipelines for automated infrastructure deployment.
 - Automated deploys of Bicep/Terraform
 - (Planned) Policy-as-Code & drift detection
 
-### 📘 Pipeline Diagram
+### Pipeline Diagram
 
 ```mermaid
 flowchart LR
