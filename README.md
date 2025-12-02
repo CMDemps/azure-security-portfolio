@@ -26,13 +26,11 @@ All projects are designed to run inside a **student Azure subscription**, making
 
 ---
 
-## 🧭 Navigation
+## Navigation
 
-- [🚨 Project A – Cloud Threat Detection Lab](#-project-a--cloud-threat-detection-lab)  
-- [🏗 Project B – Azure Landing Zone Lite](#-project-b--azure-landing-zone-lite-infrastructure-as-code)  
-- [⚙ Project C – DevSecOps Pipelines](#-project-c--devsecops-pipelines)  
-- [🧰 Tech Stack](#-tech-stack)  
-- [🌟 Highlights](#-highlights)  
+- [📁 Project A – Cloud Threat Detection Lab](#-project-a--cloud-threat-detection-lab)  
+- [📁 Project B – Azure Landing Zone Lite](#-project-b--azure-landing-zone-lite-infrastructure-as-code)  
+- [📁 Project C – DevSecOps Pipelines](#-project-c--devsecops-pipelines)   
 - [📁 Repository Structure](#-repository-structure)  
 
 ---
@@ -50,7 +48,7 @@ All projects are designed to run inside a **student Azure subscription**, making
 
 ---
 
-## 🌟 Highlights
+## Highlights
 
 - Built a full cloud threat detection lab using Sysmon + Log Analytics  
 - Developed 20+ KQL detections mapped to MITRE ATT&CK  
@@ -61,7 +59,7 @@ All projects are designed to run inside a **student Azure subscription**, making
 
 ---
 
-## 🚨 Project A — Cloud Threat Detection Lab
+## 📁 Project A — Cloud Threat Detection Lab
 
 **Location:** `/detections` and `/docs`
 
@@ -94,7 +92,7 @@ A hands-on Advanced Cloud Detection Engineering environment featuring:
 
 ---
 
-## 🏗 Project B — Azure Landing Zone Lite (Infrastructure-as-Code)
+## 📁 Project B — Azure Landing Zone Lite (Infrastructure-as-Code)
 
 **Location:** `/infra`
 
@@ -131,7 +129,7 @@ flowchart TD
 
 ---
 
-## ⚙ Project C — DevSecOps Pipelines
+## 📁 Project C — DevSecOps Pipelines
 
 **Location:** `/pipelines`
 
