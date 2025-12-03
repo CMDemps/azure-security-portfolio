@@ -7,13 +7,13 @@ All detections are mapped to MITRE ATT&CK techniques and aligned with cloud thre
 
 Each detection includes:
 
-- 🎯 Purpose  
-- 🧠 Description & threat behavior  
-- 🗂 Log sources  
-- 📘 KQL query  
-- 🧩 MITRE mapping  
-- ⚠️ False positives / tuning guidance  
-- 🔧 Deployment notes (optional Sentinel rule configs)
+- Purpose  
+- Description & threat behavior  
+- Log sources  
+- KQL query  
+- MITRE mapping  
+- False positives / tuning guidance  
+- Deployment notes (optional Sentinel rule configs)
 
 ---
 
@@ -30,24 +30,24 @@ Each detection includes:
 
 ---
 
-## 🔐 Credential Access (TA0006)
+## Credential Access (TA0006)
 
 ### **T1110 — Brute Force (RDP / Network Logon)**
 
 **Status:** ✔ Implemented as Sentinel Analytics Rule  
 **File:** `lab-01-bruteforce-detection.md`
 
-#### 🎯 Purpose
+#### Purpose
 
 Detect repeated failed RDP or network logon attempts from a single IP in a
 short time window.
 
-#### 🗂 Log Sources
+#### Log Sources
 
 - `Event` (AMA — Windows Security Events)  
 - Event ID: **4625**  
 
-#### 📘 KQL
+#### KQL
 
 ```kusto
 Event
@@ -69,12 +69,12 @@ Event
 | where FailedCount >= 5
 ```
 
-#### 🧩 MITRE Mapping
+#### MITRE Mapping
 
 - **Tactic:** Credential Access
 - **Technique:** T1110 — Brute Force
 
-#### ⚠️ Notes / False Positives
+#### Notes / False Positives
 
 - Users forgetting passwords
 - Misconfigured scripts / services  
@@ -82,24 +82,24 @@ Event
 
 ---
 
-## ⚙ Execution (TA0002)
+## Execution (TA0002)
 
 ### Suspicious PowerShell Downloader / Stager (PS-LOLBAS / Payload Delivery)
 
-**Status:** ✔ Implemented as Sentinel Analytics Rule  
+**Status:** Implemented as Sentinel Analytics Rule  
 **File:** `lab-02-process-creation.md`
 
-#### 🎯 Purpose
+#### Purpose
 
 Detect malicious or suspicious use of PowerShell as a downloader or stager, including retrieval of remote payloads, execution of downloaded content, abuse of `Invoke-WebRequest`, WebClient methods, BITS, encoded commands, or in-memory execution techniques often used during initial access and hands-on-keyboard activity.
 
 This detection is built on `Windows Security Event ID 4688` collected through AMA.
 
-#### 🗂 Log Sources
+#### Log Sources
 
 - ```Event``` (Security Log — EventID 4688: Process Creation)
 
-#### 📘 KQL (Security 4688 - AMA)
+#### KQL (Security 4688 - AMA)
 
 ```kql
 Event
@@ -134,7 +134,7 @@ Event
 | order by TimeGenerated desc
 ```
 
-#### 🧩 MITRE Mapping
+#### MITRE Mapping
 
 - **Technique:** T1059 — Command and Scripting Interpreter
 - **Sub-technique:** PowerShell (T1059.001)
@@ -143,7 +143,7 @@ Event
   - T1059.001 — Encoded or Obfuscated PowerShell
   - T1027 — Obfuscated Execution
 
-#### ⚠️ Notes / False Positives
+#### Notes / False Positives
 
 - Legitimate scripts using Invoke-WebRequest (updates, internal automation)
 - DevOps pipelines or software installers pulling content from URLs
@@ -152,21 +152,21 @@ Event
 
 ---
 
-## 🔍 Discovery (TA0007)
+## Discovery (TA0007)
 
 ### Network Scanning Activity (High Volume Connection Attempts)
 
 **Status:** Template
 
-#### 🎯 Purpose
+#### Purpose
 
 Detect scanning behavior via repeated outbound connections to many ports/IPs.
 
-#### 🗂 Log Sources
+#### Log Sources
 
 - ```Sysmon``` Event ID 3 (Network Connection)
 
-#### 📘 KQL (Template)
+#### KQL (Template)
 
 ```kql
 Sysmon
@@ -177,29 +177,29 @@ Sysmon
 | sort by ConnCount desc
 ```
 
-#### 🧩 MITRE Mapping
+#### MITRE Mapping
 
 - **Technique:** T1046 — Network Service Discovery
 
 ---
 
-## 🔄 Lateral Movement (TA0008)
+## Lateral Movement (TA0008)
 
 ### Pass-the-Hash/Pass-the-Ticket Indicators
 
 **Status:** Template
 
-#### 🎯 Purpose
+#### Purpose
 
 Identify lateral movement attempts using stolen tokens or credentials.
 
-#### 🗂 Log Sources
+#### Log Sources
 
 - ```SecurityEvent``` / ```Event```
 - Event ID: 4624, 4625  
 - ```Sysmon```
 
-#### 📘 KQL (Template)
+#### KQL (Template)
 
 ```kql
 Event
@@ -210,25 +210,26 @@ Event
 | where LogonCount > 10
 ```
 
-#### 🧩 MITRE Mapping
+#### MITRE Mapping
 
 - **Technique:** T1550 — Use of Alternate Authentication Material
 
 ---
 
-## 🛡 Defense Evasion (TA0005)
+## Defense Evasion (TA0005)
 
 ### Execution of LOLBAS Binaries (e.g., certutil, mshta, bitsadmin)
 
-**Status:** Pending Case Study 2
+**Status:** Implemented as a Sentinel Analytics rule
+**File** `lab-02-process-creation.md`
 
-#### 🗂 Log Sources
+#### Log Sources
 
 - ```Sysmon``` Event ID 1
 
 ---
 
-#### 📘 KQL (Template)
+#### KQL (Template)
 
 ```kql
 Sysmon
@@ -238,21 +239,21 @@ Sysmon
 | project TimeGenerated, Computer, User, Process, CommandLine
 ```
 
-#### 🧩 MITRE Mapping
+#### MITRE Mapping
 
 - **Technique:** T1218 — Signed Binary Proxy Execution (LOLBAS)
 
 ---
 
-## ⏳ Persistence (TA0003)
+## Persistence (TA0003)
 
 ### New Service Installations
 
-#### 🎯 Purpose
+#### Purpose
 
 Detect potential persistence via malicious service creation.
 
-#### 📘 KQL (Template)
+#### KQL (Template)
 
 ```kql
 Sysmon
@@ -260,13 +261,13 @@ Sysmon
 | where TargetObject contains "Services"
 ```
 
-#### 🧩 MITRE Mapping
+#### MITRE Mapping
 
 - **Technique:** T1543 - Create or Modify System Process
 
 ---
 
-## 🧠 Notes
+## Notes
 
 This detection pack evolves over time as I add new detections from:
 
