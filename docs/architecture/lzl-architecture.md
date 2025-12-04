@@ -67,7 +67,7 @@ Microsoft Sentinel is enabled on LAW to support:
 
 ## Architectural Diagram
 
-See: `projects/project-b-landing-zone-lite/images/lz-lite-network.png`
+![Landing Zone PNG](../../projects/project-b-landing-zone-lite/images/lz-lite-network.png)
 
 ---
 
