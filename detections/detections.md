@@ -19,14 +19,14 @@ Each detection includes:
 
 ## 📚 Table of Contents
 
-- [Credential Access (TA0006)](#credential-access-ta0006)
-- [Execution (TA0002)](#execution-ta0002)
-- [Discovery (TA0007)](#discovery-ta0007)
-- [Lateral Movement (TA0008)](#lateral-movement-ta0008)
-- [Defense Evasion (TA0005)](#defense-evasion-ta0005)
-- [Persistence (TA0003)](#persistence-ta0003)
-- [Exfiltration (TA0010)](#exfiltration-ta0010)  --> Coming Soon
-- [Impact (TA0040)](#impact-ta0040)              --> Coming Soon
+- [Credential Access (TA0006)](credential-access-ta0006)
+- [Execution (TA0002)](execution-ta0002)
+- [Discovery (TA0007)](discovery-ta0007)
+- [Lateral Movement (TA0008)](lateral-movement-ta0008)
+- [Defense Evasion (TA0005)](defense-evasion-ta0005)
+- [Persistence (TA0003)](persistence-ta0003)
+- [Exfiltration (TA0010)](exfiltration-ta0010)  --> Coming Soon
+- [Impact (TA0040)](impact-ta0040)              --> Coming Soon
 
 ---
 
@@ -34,7 +34,7 @@ Each detection includes:
 
 ### **T1110 — Brute Force (RDP / Network Logon)**
 
-**Status:** ✔ Implemented as Sentinel Analytics Rule  
+**Status:** Implemented as Sentinel Analytics Rule  
 **File:** `lab-01-bruteforce-detection.md`
 
 #### Purpose
@@ -220,8 +220,7 @@ Event
 
 ### Execution of LOLBAS Binaries (e.g., certutil, mshta, bitsadmin)
 
-**Status:** Implemented as a Sentinel Analytics rule
-**File** `lab-02-process-creation.md`
+**Status:** Template
 
 #### Log Sources
 
