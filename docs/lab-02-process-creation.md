@@ -6,14 +6,14 @@
 
 ---
 
-## 📌 Executive Summary
+## Executive Summary
 A behavioral detection rule identified **PowerShell execution with downloader/stager characteristics** on the Windows lab VM (`vm-win-sc200-la`). The activity resembled common attacker techniques used during initial access and payload staging, such as retrieving a remote script via `Invoke-WebRequest`.
 
 This case study simulates how a SOC analyst would investigate, contain, and document such an alert in a real-world environment while leveraging Azure Sentinel.
 
 ---
 
-## 📍 Event Overview
+## Event Overview
 
 | Field | Value |
 |-------|-------|
@@ -26,7 +26,7 @@ This case study simulates how a SOC analyst would investigate, contain, and docu
 
 ---
 
-## 🔎 Detection Details
+## Detection Details
 
 This alert triggered when `powershell.exe` was launched with command-line activity suggesting remote content retrieval using PowerShell as a **LOLBAS (Living-Off-the-Land Binary and Script)**.
 
@@ -45,7 +45,7 @@ The detection logic inspects **Security 4688** events and extracts:
 
 ---
 
-## 🧪 Investigation Steps
+## Investigation Steps
 
 ### **1. Validate the Alert**
 Open Sentinel → **Incidents**, locate the alert, and verify:
@@ -123,7 +123,7 @@ In this lab:
 
 ---
 
-## 🧹 Containment (Simulated)
+## Containment (Simulated)
 
 In a real SOC:
 - Terminate PowerShell process
@@ -145,7 +145,7 @@ For this lab:
 
 ---
 
-## 📚 Lessons Learned
+## Lessons Learned
 
 - Behavioral detections outperform signature-based ones for PS abuse  
 - 4688 visibility depends on proper command-line logging  
@@ -154,7 +154,7 @@ For this lab:
 
 ---
 
-## 🧩 MITRE ATT&CK Mapping
+## MITRE ATT&CK Mapping
 
 | Tactic | Technique |
 |--------|-----------|
@@ -163,7 +163,7 @@ For this lab:
 
 ---
 
-## 📝 Conclusion
+## Conclusion
 This incident demonstrates:
 - How Sentinel detects malicious PowerShell downloader activity  
 - How analysts triage process creation telemetry  
