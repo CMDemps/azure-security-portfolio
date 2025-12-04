@@ -165,23 +165,18 @@ flowchart LR
 
 Repository structure (expanded view):
 
-```text
+```pgsql
 azure-security-portfolio/
-├─ detections/
-│   ├─ detections.md
-│   └─ samples/
-│
 ├─ docs/
 │   ├─ architecture/
-│   │   ├─ cloud-detection-architecture.md
-│   │   └─ landing-zone-architecture.md
-│   ├─ lab-01-bruteforce-detection.md
-│   ├─ lab-02-process-anomaly.md
+│   |    ├─ ctd-lab-architecture.md
+│   |    ├─ lzl-architecture.md
+│   |    └─ dop-architecture.md
 │   └─ images/
-│       ├─ brute-force-diagram.png
-│       ├─ detection-flow.png
-│       ├─ landing-zone.png
-│       └─ pipeline-architecture.png
+│        ├─ cost-management.png
+│        ├─ lab-01-brute-force-detection.png
+│        ├─ lab-02-process-creation.png
+│        └─ rg-sc200-lab-topology.png
 │
 ├─ infra/
 │   ├─ bicep/
@@ -191,7 +186,23 @@ azure-security-portfolio/
 ├─ pipelines/
 │   ├─ workflows/
 │   └─ docs/
-│
+|
+├─ projects/
+│   ├─ project-a-cloud-detection-lab/
+│   │           ├─ labs/
+|   |           |    ├─ lab-01-bruteforce-detection.md
+│   |           |    └─ lab-02-process-anomaly.md
+│   │           └─ detections.md
+│   ├─ project-b-landing-zone-lite/
+|   |           ├─ images/ 
+|   |           |    └─ lz-lite-network.png
+|   |           ├─ landing-zone-lite.md
+|   |           ├─ networking.md
+|   |           └─ troubleshooting.md
+│   └─ project-c-devops-pipelines/    --> Coming Soon
+|
+|
+|
 └─ PORTFOLIO-INDEX.md
 ```
 
