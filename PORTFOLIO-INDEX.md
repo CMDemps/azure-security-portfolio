@@ -7,12 +7,12 @@ Each project demonstrates hands-on skills aligned with **Azure Security Engineer
 
 ---
 
-## 🧭 Project Overview
+## Project Overview
 
 | Project | Focus Area | Status |
 |--------|------------|--------|
-| **Project A — Cloud Threat Detection Lab** | KQL detections, Sysmon, Sentinel, MITRE ATT&CK | 🟩 Active |
-| **Project B — Azure Landing Zone Lite** | Secure cloud architecture (IaC: Bicep/Terraform) | 🟨 In Progress |
+| **Project A — Cloud Threat Detection Lab** | KQL detections, Sysmon, Sentinel, MITRE ATT&CK | 🟩 Complete |
+| **Project B — Azure Landing Zone Lite** | Secure cloud architecture (IaC: Bicep/Terraform) | 🟩 Complete |
 | **Project C — DevSecOps Pipelines** | CI/CD security, OIDC, Checkov, tfsec, CodeQL | 🟨 In Progress |
 
 ---
@@ -31,14 +31,14 @@ A complete cloud detection engineering environment using:
 - MITRE ATT&CK mapping  
 - Investigation case studies  
 
-### 🔗 Key Files
+### Key Files
 
 - **Case Study 01:** [RDP Brute Force Detection](docs/lab-01-bruteforce-detection.md)  
 - **Case Study 02:** [Suspicious Process Creation](docs/lab-02-process-creation.md)  
 - **Detection Pack:** [`detections.md`](detections/detections.md)
 - **Architecture:** [`ctd-lab-architecture.md`](docs/architecture/ctd-lab-architecture.md)
 
-### 🧠 Skills Demonstrated
+### Skills Demonstrated
 
 - Cloud threat detection engineering  
 - KQL analytics  
@@ -55,7 +55,7 @@ A complete cloud detection engineering environment using:
 
 A secure, minimal Azure Landing Zone that can be deployed in an Azure Student Subscription using **Infrastructure-as-Code**.
 
-### 🔐 Components
+### Components
 
 - Resource Groups  
 - VNet + Subnets (App / Mgmt / Logging)  
@@ -65,16 +65,16 @@ A secure, minimal Azure Landing Zone that can be deployed in an Azure Student Su
 - Diagnostic settings  
 - Hardened Windows/Linux VMs  
 
-### 📦 IaC Implementations
+### IaC Implementations
 
 - [`/infra/bicep`](infra/bicep/) — Bicep Modules  
 - [`/infra/terraform`](infra/terraform/) — Terraform (optional)  
 
-### 📘 Documentation
+### Documentation
 
 - [`landing-zone-architecture.md`](docs/architecture/landing-zone-architecture.md)  
 
-### 🧠 Skills Demonstrated
+### Skills Demonstrated
 
 - Azure network design  
 - Zero Trust segmentation (Lite model)  
@@ -90,7 +90,7 @@ A secure, minimal Azure Landing Zone that can be deployed in an Azure Student Su
 
 Security-integrated CI/CD pipelines using GitHub Actions + Azure OIDC.
 
-### 🔧 Pipeline Features
+### Pipeline Features
 
 - IaC linting  
 - IaC security scanning (Checkov / tfsec)  
@@ -100,11 +100,11 @@ Security-integrated CI/CD pipelines using GitHub Actions + Azure OIDC.
 - GitHub OIDC → Azure (No secrets)  
 - Automated Bicep/Terraform deployments  
 
-### 📘 Documentation
+### Documentation
 
 - [`infra-deploy-pipeline.md`](docs/architecture/infra-deploy-pipeline.md)  
 
-### 🧠 Skills Demonstrated
+### Skills Demonstrated
 
 - DevSecOps workflow design  
 - GitHub Actions automation  
@@ -114,21 +114,19 @@ Security-integrated CI/CD pipelines using GitHub Actions + Azure OIDC.
 
 ---
 
-## 🧩 Future Enhancements
+## Future Enhancements
 
-### 🔄 For Detection Lab
+### For Detection Lab
 
 - Additional MITRE-aligned detections  
 - Behavioral analytics Notebook  
 - Sentinel-as-Code export (if tenant permits)
 
-### 🛡 For Landing Zone
-
-- Azure Firewall / NSG Flow Logs  
-- Azure Bastion integration  
+### For Landing Zone
+ 
 - DCR (Data Collection Rule) automation  
 
-### 🔧 For DevSecOps
+### For DevSecOps
 
 - Drift detection & compliance pipeline  
 - Azure Policy-as-Code  
