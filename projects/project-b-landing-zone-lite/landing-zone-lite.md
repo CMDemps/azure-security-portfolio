@@ -50,7 +50,8 @@ This provides the visibility foundation used in Project C for correlation, hunti
 ---
 
 ## Logical Architecture Diagram  
-See: `docs/landing-zone-lite/images/lz-lite-network.png`
+
+![Landing Zone PNG](images/lz-lite-network.png)
 
 ---
 
