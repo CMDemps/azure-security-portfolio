@@ -201,8 +201,6 @@ azure-security-portfolio/
 │   │           └─ troubleshooting.md
 │   └─ project-c-devops-pipelines/    --> Coming Soon
 |
-|
-|
 └─ PORTFOLIO-INDEX.md
 ```
 
