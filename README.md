@@ -190,15 +190,15 @@ azure-security-portfolio/
 ├─ projects/
 │   ├─ project-a-cloud-detection-lab/
 │   │           ├─ labs/
-|   |           |    ├─ lab-01-bruteforce-detection.md
-│   |           |    └─ lab-02-process-anomaly.md
+│   │           │    ├─ lab-01-bruteforce-detection.md
+│   │           │    └─ lab-02-process-anomaly.md
 │   │           └─ detections.md
 │   ├─ project-b-landing-zone-lite/
-|   |           ├─ images/ 
-|   |           |    └─ lz-lite-network.png
-|   |           ├─ landing-zone-lite.md
-|   |           ├─ networking.md
-|   |           └─ troubleshooting.md
+│   │           ├─ images/ 
+│   │           │    └─ lz-lite-network.png
+│   │           ├─ landing-zone-lite.md
+│   │           ├─ networking.md
+│   │           └─ troubleshooting.md
 │   └─ project-c-devops-pipelines/    --> Coming Soon
 |
 |
