@@ -4,7 +4,7 @@
 
 ---
 
-## 🔍 Overview
+## Overview
 
 This case study demonstrates how to detect and investigate a remote brute-force attack against an Azure Windows VM using:
 
@@ -20,7 +20,7 @@ The goal is to simulate a realistic RDP brute-force attempt and validate that th
 
 ---
 
-## 🏗️ Lab Environment
+## Lab Environment
 
 | Component | Purpose |
 |----------|---------|
@@ -32,7 +32,7 @@ The goal is to simulate a realistic RDP brute-force attempt and validate that th
 
 ---
 
-## 🎯 Attack Scenario
+## Attack Scenario
 
 ### Goal  
 
@@ -55,7 +55,7 @@ Repeated failures may indicate:
 
 ---
 
-## 🚀 Simulation Steps
+## Simulation Steps
 
 ### Option A — Manual  
 
@@ -73,7 +73,7 @@ hydra -l Administrator -P /usr/share/wordlists/rockyou.txt rdp://<TARGET-IP>
 
 ---
 
-## 📥 Log Ingestion
+## Log Ingestion
 
 The following events were sent to Log Analytics:
 
@@ -99,7 +99,7 @@ flowchart LR
 
 ---
 
-## 🛡️ Detection: Sentinel Analytics Rule
+## Detection: Sentinel Analytics Rule
 
 ### RDP Brute Force Detection (Event Table)
 
@@ -111,7 +111,7 @@ This rule is actively enabled in Microsoft Sentinel.
 **Lookup period**: Last 5 minutes
 **Trigger**: If query returns > 0 results
 
-### 🔎 KQL Analytics Rule Query (Actual Rule Implemented)
+### KQL Analytics Rule Query (Actual Rule Implemented)
 
 ```kql
 Event
@@ -133,7 +133,7 @@ Event
 | where FailedCount >= 5
 ```
 
-## 🧠 What This Rule Detects
+## What This Rule Detects
 
 - High volume of failed login attempts
 - Attempts targeting the same user
@@ -144,7 +144,7 @@ Event
 
 ---
 
-## 🕵️ Investigation Workflow
+## Investigation Workflow
 
 ### 1. Identify attacker IP
 
@@ -187,7 +187,7 @@ Look for:
 
 ---
 
-## 📊 Results
+## Results
 
 During testing:
 
@@ -199,7 +199,7 @@ During testing:
 
 ---
 
-## 🚨 Example Alert Summary
+## Example Alert Summary
 
 **Alert:** RDP Brute Force Detection (Event Table)
 **Attacker IP:** X.X.X.X
@@ -210,7 +210,7 @@ During testing:
 
 ---
 
-## ⚠️ False Positive Considerations
+## False Positive Considerations
 
 - Users typing incorrect passwords
 - Automated scripts reconnecting
@@ -225,7 +225,7 @@ During testing:
 
 ---
 
-## 🛡️ Mitigation Recommendations
+## Mitigation Recommendations
 
 - Restrict RDP via NSG or Azure Firewall
 - Use Azure Bastion instead of public RDP
@@ -236,7 +236,7 @@ During testing:
 
 ---
 
-## 💡 Skills Demonstrated
+## Skills Demonstrated
 
 - KQL detection engineering
 - Sentinel analytics rule creation
