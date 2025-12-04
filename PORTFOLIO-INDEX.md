@@ -17,7 +17,7 @@ Each project demonstrates hands-on skills aligned with **Azure Security Engineer
 
 ---
 
-## 🚨 Project A — Cloud Threat Detection Lab
+## 📁 Project A — Cloud Threat Detection Lab
 
 **Folder:** [`/detections`](detections/) & [`/docs`](docs/)
 
@@ -49,7 +49,7 @@ A complete cloud detection engineering environment using:
 
 ---
 
-## 🏗️ Project B — Azure Landing Zone Lite
+## 📁 Project B — Azure Landing Zone Lite
 
 **Folder:** [`/infra`](infra/)
 
@@ -84,7 +84,7 @@ A secure, minimal Azure Landing Zone that can be deployed in an Azure Student Su
 
 ---
 
-## ⚙️ Project C — DevSecOps Pipelines
+## 📁 Project C — DevSecOps Pipelines
 
 **Folder:** [`/pipelines`](pipelines/)
 
