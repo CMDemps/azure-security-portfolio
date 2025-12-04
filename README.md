@@ -94,7 +94,7 @@ A hands-on Advanced Cloud Detection Engineering environment featuring:
 
 ## 📁 Project B — Azure Landing Zone Lite (Infrastructure-as-Code)
 
-**Location:** `/infra`
+**Location:** `/docs/landing-zone-lite`
 
 A minimal, secure Azure Landing Zone designed for restricted tenants.
 
@@ -109,8 +109,8 @@ A minimal, secure Azure Landing Zone designed for restricted tenants.
 
 ### IaC Available In
 
-- `/infra/bicep/` (Bicep modules)  
-- `/infra/terraform/` (Terraform alternative)  
+- `/landing-zone-lite/bicep/` (Bicep modules)  
+- `/landing-zone-lite/terraform/` (Terraform alternative)  
 
 ### Architecture Diagram (Mermaid)
 
