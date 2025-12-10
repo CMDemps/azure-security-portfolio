@@ -55,7 +55,7 @@ azure-security-portfolio/
 ## Coding Conventions & Best Practices
 
 ### Documentation Style
-- Use **emoji headers** for visual clarity (e.g., `# 🔍 Detection Pack`)
+- Use **emoji prefixes** in headers for visual clarity (e.g., `# 🔍 Detection Pack`)
 - Start all major documents with a brief overview and purpose
 - Include **MITRE ATT&CK mappings** for all detections (Tactic, Technique, ID)
 - Use tables for structured information (components, skills, mappings)
@@ -73,10 +73,10 @@ azure-security-portfolio/
   ```kql
   // Purpose: Detect RDP brute force attempts
   // MITRE ATT&CK: T1110 - Brute Force
-  Event
+  SecurityEvent
   | where EventID == 4625
   | where TimeGenerated > ago(1h)
-  | summarize FailedAttempts = count() by IpAddress, TargetAccount
+  | summarize FailedAttempts = count() by IpAddress, TargetUserName
   | where FailedAttempts > 10
   ```
 
@@ -158,10 +158,17 @@ azure-security-portfolio/
 ### IaC Deployment
 ```bash
 # Bicep deployment
+# Use a JSON parameter file:
 az deployment group create \
   --resource-group <rg-name> \
   --template-file main.bicep \
   --parameters @parameters.json
+
+# Or use a native Bicep parameter file (recommended for Bicep projects):
+az deployment group create \
+  --resource-group <rg-name> \
+  --template-file main.bicep \
+  --parameters @main.bicepparam
 
 # Terraform deployment
 terraform init
