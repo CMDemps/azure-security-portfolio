@@ -175,8 +175,8 @@ A minimal, secure Azure Landing Zone designed for restricted tenants and student
 
 ### 🔧 IaC Available In
 
-- [`projects/project-b-landing-zone-lite/infra/bicep/`](projects/project-b-landing-zone-lite/infra/bicep/) — Bicep modules (planned)
-- [`projects/project-b-landing-zone-lite/infra/terraform/`](projects/project-b-landing-zone-lite/infra/terraform/) — Terraform alternative (planned)
+- [`infra/bicep/`](infra/bicep/) — Bicep modules (planned)
+- [`infra/terraform/`](infra/terraform/) — Terraform alternative (planned)
 
 ### 🎨 Architecture Diagram (Mermaid)
 
