@@ -385,20 +385,20 @@ flowchart LR
 
 ## 🔄 Project Roadmap
 
-### Current Focus (Q4 2024)
+### Current Focus (Q4 2025)
 - [x] Complete Project A detection lab
 - [x] Document Project A case studies
 - [x] Complete Project B infrastructure
 - [x] Document Project B architecture
 
-### Next Steps (Q1 2025)
+### Next Steps (Q1 2026)
 - [ ] Develop Project C pipeline architecture
 - [ ] Implement IaC modules (Bicep)
 - [ ] Create CI/CD workflows
 - [ ] Add additional Project A detections
 - [ ] Implement Policy-as-Code
 
-### Future Vision (Q2 2025+)
+### Future Vision (Q2 2026+)
 - [ ] Multi-region architecture
 - [ ] Advanced SOAR playbooks
 - [ ] ML-based anomaly detection
