@@ -15,7 +15,7 @@ Each project demonstrates hands-on skills aligned with **Azure Security Engineer
 |--------|------------|--------|--------|
 | **[Project A](#project-a--cloud-threat-detection-lab)** | Cloud Threat Detection Lab | KQL detections, Sysmon, Sentinel, MITRE ATT&CK | 🟩 Complete |
 | **[Project B](#project-b--azure-landing-zone-lite)** | Azure Landing Zone Lite | Secure cloud architecture (IaC: Bicep/Terraform) | 🟩 Complete |
-| **[Project C](#project-c--devsecops-pipelines)** | DevSecOps Pipelines | CI/CD security, OIDC, Checkov, tfsec, CodeQL | 🟨 Planned |
+| **[Project C](#project-c--devsecops-pipelines)** | DevSecOps Pipelines | CI/CD security, OIDC, Checkov, tfsec, CodeQL | 🟦 Planned |
 
 **Legend:**
 - 🟩 Complete — Fully implemented and documented
@@ -158,7 +158,7 @@ This landing zone implements Azure security best practices while remaining cost-
 
 | Technology | Location | Status |
 |------------|----------|--------|
-| **Bicep Modules** | [`/infra/bicep/`](infra/bicep/) | 🟦 Planned |
+| **Bicep Modules** | [`/infra/bicep/`](infra/bicep/) | ✅ Core Networking Module Complete |
 | **Terraform** | [`/infra/terraform/`](infra/terraform/) | 🟦 Planned |
 
 **Planned Modules:**
@@ -201,14 +201,14 @@ This landing zone implements Azure security best practices while remaining cost-
 - ✅ Log Analytics integration
 - ✅ Data Collection Rules (DCRs)
 - ✅ Cloud architecture documentation
+- ✅ Defender for Cloud enablement
 
 ### 🔮 Planned Enhancements
 
-- [ ] Bicep/Terraform IaC deployment
+- [ ] Terraform IaC deployment
 - [ ] Private endpoints for PaaS services
 - [ ] Application Gateway integration
 - [ ] Azure Policy implementation
-- [ ] Defender for Cloud enablement
 - [ ] Automated compliance reporting
 - [ ] Multi-region expansion pattern
 
@@ -217,7 +217,7 @@ This landing zone implements Azure security best practices while remaining cost-
 ## 📁 Project C — DevSecOps Pipelines
 
 **📂 Folder:** [`/projects/project-c-devsecops-pipelines/`](projects/project-c-devsecops-pipelines/)  
-**📊 Status:** 🟨 Planned
+**📊 Status:** 🟦 Planned
 
 ### Overview
 
