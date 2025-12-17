@@ -392,10 +392,10 @@ flowchart LR
 - [x] Document Project B architecture
 
 ### Next Steps (Q1 2026)
-- [ ] Develop Project C pipeline architecture
-- [ ] Implement IaC modules (Bicep)
+- [x] Develop Project C pipeline architecture
+- [x] Implement IaC modules (Bicep)
 - [ ] Create CI/CD workflows
-- [ ] Add additional Project A detections
+- [x] Add additional Project A detections
 - [ ] Implement Policy-as-Code
 
 ### Future Vision (Q2 2026+)
