@@ -82,6 +82,195 @@ Event
 
 ---
 
+### **High-Risk Role Assignment Detection**
+
+**Status:** Implemented as Sentinel Analytics Rule  
+**Data Source:** AuditLogs
+
+#### Purpose
+
+Detect when privileged roles (Global Administrator, Security Administrator, etc.) are assigned to user accounts, which could indicate privilege escalation or insider threat activity.
+
+#### Log Sources
+
+- `AuditLogs` (Entra ID Audit Logs via data connector)
+- Operation: "Add member to role"
+
+#### KQL
+```kql
+AuditLogs
+| where TimeGenerated > ago(1h)
+| where OperationName == "Add member to role"
+| where Result == "success"
+| extend TargetUser = tostring(TargetResources[0].userPrincipalName)
+| extend RoleNameRaw = tostring(TargetResources[0].modifiedProperties[1].newValue)
+| extend RoleName = trim('"', RoleNameRaw)
+| extend AssignedBy = tostring(InitiatedBy.user.userPrincipalName)
+| extend SourceIP = tostring(InitiatedBy.user.ipAddress)
+| where RoleName in ("Global Administrator", "Security Administrator", "User Administrator", 
+    "Privileged Role Administrator", "Application Administrator")
+| project TimeGenerated, TargetUser, RoleName, AssignedBy, SourceIP, Result
+| extend ThreatLevel = "High"
+```
+
+#### MITRE Mapping
+
+- **Tactic:** Persistence, Privilege Escalation
+- **Technique:** T1098.003 - Account Manipulation: Additional Cloud Roles
+
+#### Alert Enrichment
+
+**Custom Details:**
+- ThreatLevel: High
+- RoleName: Assigned privileged role
+- AssignedBy: Account that performed the assignment
+- SourceIP: IP address of assignment action
+
+**Entity Mapping:**
+- Account: TargetUser (who received the role)
+- Account: AssignedBy (who assigned the role)
+- IP: SourceIP
+
+#### Notes / False Positives
+
+- Legitimate IT admin role assignments
+- Onboarding new administrators
+- Scheduled access reviews
+
+**Tuning:** Exclude known admin accounts, add time-of-day filtering for after-hours assignments
+
+---
+
+### **Bulk User Creation Detection**
+
+**Status:** Implemented as Sentinel Analytics Rule  
+**Data Source:** AuditLogs
+
+#### Purpose
+
+Detect when 3 or more user accounts are created within a short time window, potentially indicating unauthorized account provisioning or preparation for attack.
+
+#### Log Sources
+
+- `AuditLogs` (Entra ID Audit Logs)
+- Operation: "Add user"
+
+#### KQL
+```kql
+AuditLogs
+| where OperationName == "Add user"
+| where Result == "success"
+| extend CreatedBy = tostring(InitiatedBy.user.userPrincipalName)
+| extend SourceIP = tostring(InitiatedBy.user.ipAddress)
+| extend CreatedUser = tostring(TargetResources[0].userPrincipalName)
+| summarize 
+    UserCount = count(), 
+    CreatedUsers = make_list(CreatedUser),
+    UniqueIPs = dcount(SourceIP),
+    SourceIPs = make_set(SourceIP),
+    StartTime = min(TimeGenerated),
+    EndTime = max(TimeGenerated)
+    by CreatedBy, bin(TimeGenerated, 10m)
+| where UserCount >= 3 or UniqueIPs >= 2
+| extend Severity = iff(UniqueIPs >= 2, "High", "Medium")
+| project TimeGenerated, CreatedBy, UserCount, UniqueIPs, CreatedUsers, SourceIPs, Severity, StartTime, EndTime
+```
+
+#### MITRE Mapping
+
+- **Tactic:** Persistence, Initial Access
+- **Technique:** T1136.003 - Create Account: Cloud Account
+
+#### Alert Enrichment
+
+**Custom Details:**
+- UserCount: Number of accounts created
+- CreatedUsers: List of new accounts
+- UniqueIPs: Count of source IPs (multiple IPs = higher threat)
+- Severity: Dynamic severity based on indicators
+
+**Entity Mapping:**
+- Account: CreatedBy (who created the accounts)
+- IP: SourceIPs
+
+#### Notes / False Positives
+
+- Legitimate bulk onboarding of new employees
+- Automated user provisioning systems
+- HR/IT scheduled processes
+
+**Tuning:** Exclude service accounts, increase threshold during known onboarding periods
+
+---
+
+### **User Modification Detection with Alert Enrichment**
+
+**Status:** Implemented as Sentinel Analytics Rule  
+**Data Source:** AuditLogs
+
+#### Purpose
+
+Detect suspicious modifications to user accounts (role changes, password resets, MFA changes) with detailed alert enrichment for investigation.
+
+#### Log Sources
+
+- `AuditLogs` (Entra ID Audit Logs)
+- Operations: Update user, Reset password, Add member to role, Remove member from role
+
+#### KQL
+```kql
+AuditLogs
+| where TimeGenerated > ago(1h)
+| where OperationName has_any ("Update user", "Reset password", "Add member to role", "Remove member from role")
+| where Result == "success"
+| extend TargetUser = tostring(TargetResources[0].userPrincipalName)
+| extend Actor = tostring(InitiatedBy.user.userPrincipalName)
+| extend SourceIP = tostring(InitiatedBy.user.ipAddress)
+| summarize 
+    ChangeCount = count(),
+    Operations = make_set(OperationName),
+    UniqueIPs = dcount(SourceIP),
+    SourceIPs = make_set(SourceIP),
+    StartTime = min(TimeGenerated),
+    EndTime = max(TimeGenerated)
+    by TargetUser, Actor, bin(TimeGenerated, 10m)
+| where ChangeCount >= 2
+| extend ThreatLevel = case(
+    ChangeCount >= 5, "High",
+    UniqueIPs >= 2, "High",
+    "Medium"
+)
+| project TimeGenerated, TargetUser, Actor, ChangeCount, Operations, UniqueIPs, SourceIPs, ThreatLevel, StartTime, EndTime
+```
+
+#### MITRE Mapping
+
+- **Tactic:** Persistence, Defense Evasion
+- **Technique:** T1098 - Account Manipulation
+
+#### Alert Enrichment
+
+**Custom Details:**
+- ThreatLevel: High/Medium based on activity volume
+- ChangeCount: Number of modifications
+- Operations: Types of changes made
+- UniqueIPs: Source IP diversity (indicates potential compromise)
+
+**Entity Mapping:**
+- Account: TargetUser (account being modified)
+- Account: Actor (who made the changes)
+- IP: SourceIPs
+
+#### Notes / False Positives
+
+- IT help desk password resets
+- Legitimate admin account management
+- Automated account lifecycle processes
+
+**Tuning:** Exclude service accounts, filter for after-hours activity only
+
+---
+
 ## Execution (TA0002)
 
 ### Suspicious PowerShell Downloader / Stager (PS-LOLBAS / Payload Delivery)
@@ -152,6 +341,121 @@ Event
 
 ---
 
+## Behavioral Analytics (TA0009)
+
+### **ASIM - Multi-Source Brute Force Detection**
+
+**Status:** Implemented as Sentinel Analytics Rule  
+**Data Source:** BehaviorAnalytics, ASIM Authentication Parser
+
+#### Purpose
+
+Detect brute force authentication attempts across ALL authentication sources using ASIM normalization - works with Defender for Identity, Windows Security Events, and Entra ID simultaneously.
+
+#### Log Sources
+
+- `_Im_Authentication` (ASIM normalized authentication events)
+- Sources: Entra ID, Windows Security Events, Defender for Identity
+
+#### KQL
+```kql
+_Im_Authentication
+| where TimeGenerated > ago(1h)
+| where EventResult == "Failure"
+| summarize 
+    FailureCount = count(),
+    SourceIPs = make_set(SrcIpAddr),
+    FirstFailure = min(TimeGenerated),
+    LastFailure = max(TimeGenerated)
+    by TargetUsername, DvcHostname
+| where FailureCount >= 5
+| project 
+    LastFailure,
+    TargetUsername, 
+    DvcHostname,
+    FailureCount, 
+    SourceIPs,
+    FirstFailure
+```
+
+#### MITRE Mapping
+
+- **Tactic:** Credential Access
+- **Technique:** T1110 - Brute Force
+
+#### Key Feature: ASIM Normalization
+
+This detection works across multiple data sources simultaneously because ASIM normalizes field names:
+- **TargetUsername** works for Windows `TargetUserName`, Entra `UserPrincipalName`, Defender `AccountName`
+- **SrcIpAddr** works across all source IP fields
+- **EventResult** normalized from Success/Failure/0x0/etc.
+
+**Benefit:** One query detects brute force from any authentication source - add new sources, detection continues working without modification.
+
+#### Notes / False Positives
+
+- Users forgetting passwords
+- Misconfigured applications
+- Legacy systems with authentication issues
+
+**Tuning:** Adjust threshold based on environment, exclude service accounts
+
+---
+
+### **High Risk User Activity - UEBA**
+
+**Status:** Implemented as Sentinel Analytics Rule  
+**Data Source:** BehaviorAnalytics
+
+#### Purpose
+
+Detect users with high Investigation Priority scores from UEBA machine learning analysis, indicating anomalous behavior patterns.
+
+#### Log Sources
+
+- `BehaviorAnalytics` (UEBA-generated behavioral analysis)
+
+#### KQL
+```kql
+BehaviorAnalytics
+| where TimeGenerated > ago(1h)
+| where InvestigationPriority > 7
+| where ActivityInsights has "True"
+| project TimeGenerated, UserPrincipalName, InvestigationPriority, ActivityType, ActivityInsights
+```
+
+#### MITRE Mapping
+
+- **Tactic:** Multiple (behavioral anomalies)
+- **Technique:** N/A (ML-based detection, not specific technique)
+
+#### Key Feature: Machine Learning Detection
+
+**Investigation Priority Score (0-10):**
+- 0-3: Normal behavior
+- 4-6: Minor anomalies
+- 7-8: Significant deviation - **triggers this rule**
+- 9-10: Critical anomaly
+
+**What UEBA Detects:**
+- Unusual login locations
+- Access to resources user normally doesn't touch
+- Peer group behavioral deviation
+- Time-of-day anomalies
+- Privilege escalation patterns
+
+**Complements rule-based detections** - catches insider threats and compromised accounts that evade signature-based rules.
+
+#### Notes / False Positives
+
+- New employees establishing baseline behavior
+- Role changes (promotion, department transfer)
+- Legitimate business travel
+- Remote work pattern changes
+
+**Tuning:** UEBA requires 24-72 hours to establish baselines, expect higher false positives initially
+
+---
 ## Discovery (TA0007)
 
 ### Network Scanning Activity (High Volume Connection Attempts)
