@@ -15,7 +15,7 @@ Deployed and configured Microsoft Defender for Endpoint across a hybrid environm
 
 ## Custom Detection Rules
 
-![DetectionRules](project-a-cloud-detection-lab/images/DetectionRules.png) `Full list of all detection & analytics rules created.`  
+![DetectionRules](images/DetectionRules.png) `Full list of all detection & analytics rules created.`  
 
 * These rules generated real incidents during testing, validating detection logic and entity mapping.  
 * I created 5 custom detection rules using Advanced Hunting (KQL) to detect real-world attack techniques:
