@@ -97,30 +97,48 @@ This portfolio demonstrates proficiency in:
 **📂 Location:** [`/projects/project-a-cloud-detection-lab`](projects/project-a-cloud-detection-lab/)  
 **📊 Status:** 🟩 Complete
 
-A hands-on cloud detection engineering environment featuring:
+A comprehensive cloud detection engineering environment featuring:
 
-- Azure Log Analytics Workspace  
-- Sysmon/AMA ingestion  
-- KQL-based detections  
-- MITRE ATT&CK-aligned threat scenarios  
-- Full analysis writeups & investigation workflows  
+- **Defender for Endpoint**: 3 onboarded devices with 5 custom detection rules
+- **Microsoft Sentinel**: 7+ analytics rules with MITRE ATT&CK mapping
+- **SOAR Automation**: 5 Logic Apps playbooks for incident response
+- **Threat Hunting**: 5 hypothesis-driven KQL hunting queries
+- **Workbooks**: 4 operational dashboards for analysis and investigation
+- **Azure Log Analytics**: Centralized log aggregation and analysis
+- **Sysmon/AMA Integration**: Advanced telemetry collection
 
-### 🎯 Detection Scenarios
+### 🎯 Security Operations Capabilities
 
-- Brute-force login attacks (T1110)
-- Suspicious PowerShell/LOLBin usage (T1059.001)
-- Process anomalies
-- Key Vault access anomalies (planned)
-- VM metadata exploitation patterns (planned)
-- Lateral movement techniques (planned)
+**Detection & Response:**
+- 7+ Sentinel analytics rules (credential access, privilege escalation, UEBA)
+- 5 Defender for Endpoint custom detections (T1059, T1003, T1021, T1547, T1087)
+- ASIM-based multi-source brute force detection
+- Behavioral analytics with UEBA
 
-### 📖 Featured Case Studies
+**Automation & SOAR:**
+- Automated incident containment (session revocation, account disable)
+- High-severity email notifications
+- Content Hub solution deployment
 
-| Lab | Technique | Status |
-|-----|-----------|--------|
-| [Lab 01 — RDP Brute Force Detection](projects/project-a-cloud-detection-lab/labs/lab-01-bruteforce-detection.md) | T1110 - Brute Force | ✅ Complete |
-| [Lab 02 — Suspicious Process Creation](projects/project-a-cloud-detection-lab/labs/lab-02-process-creation.md) | T1059.001 - PowerShell | ✅ Complete |
-| [Detection Pack](projects/project-a-cloud-detection-lab/detections.md) | Multiple Techniques | 🟨 In Progress |
+**Threat Hunting:**
+- Off-hours administrative activity detection
+- Rapid privilege escalation chain analysis
+- Mass user modification detection
+- Suspicious IP pattern identification
+- Failed login spike analysis
+
+### 📖 Documentation
+
+| Document | Description | Status |
+|----------|-------------|--------|
+| [Lab 01 — RDP Brute Force Detection](projects/project-a-cloud-detection-lab/labs/lab-01-bruteforce-detection.md) | T1110 credential access detection and investigation | ✅ Complete |
+| [Lab 02 — Suspicious Process Creation](projects/project-a-cloud-detection-lab/labs/lab-02-process-creation.md) | T1059.001 PowerShell execution analysis | ✅ Complete |
+| [Defender for Endpoint](projects/project-a-cloud-detection-lab/defender-for-endpoint.md) | 3 devices, 5 custom detection rules | ✅ Complete |
+| [Automation Playbooks](projects/project-a-cloud-detection-lab/automation-playbooks.md) | 5 Logic Apps SOAR workflows | ✅ Complete |
+| [Playbook Case Studies](projects/project-a-cloud-detection-lab/playbooks/) | 3 detailed automation implementations | ✅ Complete |
+| [Analytics Rules](projects/project-a-cloud-detection-lab/detections.md) | 7+ Sentinel detection rules | ✅ Complete |
+| [Workbooks](projects/project-a-cloud-detection-lab/workbooks.md) | 4 investigation and hunting dashboards | ✅ Complete |
+| [Threat Hunting Queries](projects/project-a-cloud-detection-lab/hunting-queries.md) | 5 hypothesis-driven hunts | ✅ Complete |
 
 ### 🏗 Architecture
 
@@ -129,21 +147,51 @@ View the complete architecture diagram and technical details:
 
 ### 🛠 Key Technologies
 
-- Windows Security Events (Event ID 4624, 4625, 4688)
+**Detection & Monitoring:**
+- Microsoft Sentinel (SIEM/SOAR)
+- Defender for Endpoint (EDR)
+- Windows Security Events (4624, 4625, 4688)
 - Sysmon (Event IDs 1, 3, 7, 11)
 - Azure Monitor Agent (AMA)
-- Data Collection Rules (DCR)
-- Microsoft Sentinel Analytics Rules
+- UEBA (User & Entity Behavior Analytics)
+
+**Automation & Response:**
+- Logic Apps (SOAR workflows)
+- Content Hub solutions
+- Managed identities (secure authentication)
+
+**Analysis & Hunting:**
+- KQL (Kusto Query Language)
+- Sentinel Workbooks
+- ASIM normalization
+- MITRE ATT&CK framework
 
 ### 📈 Skills Demonstrated
 
-- Cloud threat detection engineering
+**Detection Engineering:**
+- Cloud threat detection with Sentinel and Defender for Endpoint
 - KQL query development and optimization
-- Sysmon configuration and log analysis
 - MITRE ATT&CK framework mapping
-- Sentinel analytics rule creation
-- Investigation & triage workflows
+- Multi-source correlation with ASIM
+- Behavioral analytics (UEBA) implementation
+
+**Security Automation (SOAR):**
+- Logic Apps workflow design and implementation
+- Automated incident containment
+- Content Hub solution deployment
+- Managed identity configuration
+
+**Threat Hunting:**
+- Hypothesis-driven hunting methodology
+- Risk scoring algorithm development
+- Workbook development for operational efficiency
+- Hunt-to-rule promotion workflows
+
+**Investigation & Analysis:**
+- Incident response and triage
 - Attack simulation and validation
+- Sysmon configuration and log analysis
+- Cross-environment correlation
 
 ---
 
@@ -171,6 +219,7 @@ A minimal, secure Azure Landing Zone designed for restricted tenants and student
 | [Landing Zone Overview](projects/project-b-landing-zone-lite/landing-zone-lite.md) | Architecture overview and design principles |
 | [Networking Deep Dive](projects/project-b-landing-zone-lite/networking.md) | Detailed networking configuration |
 | [Troubleshooting Guide](projects/project-b-landing-zone-lite/troubleshooting.md) | Common issues and solutions |
+| [Hybrid AD Setup](projects/project-b-landing-zone-lite/hybrid-ad-setup.md) | On-premises DC with Entra Connect | 
 | [Architecture Diagram](docs/architecture/lzl-architecture.md) | Visual architecture documentation |
 
 ### 🔧 IaC Available In
