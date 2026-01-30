@@ -45,21 +45,27 @@ A complete cloud detection engineering environment using:
 
 | MITRE Tactic | Techniques Covered | Detection Count |
 |--------------|-------------------|-----------------|
-| Credential Access (TA0006) | T1110 - Brute Force | 1 |
-| Execution (TA0002) | T1059.001 - PowerShell | 1 |
-| Discovery (TA0007) | T1046 - Network Service Discovery | Template |
-| Lateral Movement (TA0008) | T1550 - Alternate Auth Material | Template |
-| Defense Evasion (TA0005) | T1218 - LOLBAS | Template |
-| Persistence (TA0003) | T1543 - Service Creation | Template |
-| **Total Active Detections** | | **2 operational, 4 templates** |
+| Credential Access (TA0006) | T1110 - Brute Force, T1003 - Credential Dumping | 2 Sentinel + 1 MDE |
+| Execution (TA0002) | T1059.001 - PowerShell | 1 Sentinel + 1 MDE |
+| Persistence (TA0003) | T1098 - Account Manipulation, T1547 - Registry Run Keys, T1543 - Service Creation | 3 Sentinel + 1 MDE |
+| Privilege Escalation (TA0004) | T1098.003 - Additional Cloud Roles | 2 Sentinel |
+| Lateral Movement (TA0008) | T1021.002 - SMB/Windows Admin Shares | 1 MDE |
+| Discovery (TA0007) | T1087 - Account Discovery | 1 MDE |
+| Behavioral Analytics (TA0009) | Multi-source detection, UEBA | 2 Sentinel |
+| **Total Active Detections** | | **7 Sentinel + 5 MDE + 5 Hunts** |
 
 ### 📖 Key Files & Documentation
 
 | Document | Description | Status |
 |----------|-------------|--------|
-| **[Lab 01 — RDP Brute Force Detection](projects/project-a-cloud-detection-lab/labs/lab-01-bruteforce-detection.md)** | Complete case study on detecting credential access attacks | ✅ Complete |
-| **[Lab 02 — Suspicious Process Creation](projects/project-a-cloud-detection-lab/labs/lab-02-process-creation.md)** | PowerShell downloader/stager detection and investigation | ✅ Complete |
-| **[Detection Pack](projects/project-a-cloud-detection-lab/detections.md)** | Comprehensive KQL detection library | 🟨 Expanding |
+| **[Lab 01 — RDP Brute Force Detection](projects/project-a-cloud-detection-lab/labs/lab-01-bruteforce-detection.md)** | Credential access attack detection case study | ✅ Complete |
+| **[Lab 02 — Suspicious Process Creation](projects/project-a-cloud-detection-lab/labs/lab-02-process-creation.md)** | PowerShell execution detection and investigation | ✅ Complete |
+| **[Defender for Endpoint](projects/project-a-cloud-detection-lab/defender-for-endpoint.md)** | 3 devices, 5 custom detection rules, testing validation | ✅ Complete |
+| **[Automation Playbooks](projects/project-a-cloud-detection-lab/automation-playbooks.md)** | 5 Logic Apps SOAR workflows overview | ✅ Complete |
+| **[Playbook Case Studies](projects/project-a-cloud-detection-lab/playbooks/)** | 3 detailed automation implementations | ✅ Complete |
+| **[Analytics Rules](projects/project-a-cloud-detection-lab/detections.md)** | 7+ Sentinel detection rules with MITRE mapping | ✅ Complete |
+| **[Workbooks](projects/project-a-cloud-detection-lab/workbooks.md)** | 4 investigation and hunting dashboards | ✅ Complete |
+| **[Threat Hunting Queries](projects/project-a-cloud-detection-lab/hunting-queries.md)** | 5 hypothesis-driven threat hunts | ✅ Complete |
 | **[Architecture Diagram](docs/architecture/ctd-lab-architecture.md)** | Technical architecture and data flow | ✅ Complete |
 
 ### 🎯 Lab Scenarios Implemented
@@ -89,23 +95,36 @@ A complete cloud detection engineering environment using:
 
 ### 🛠 Skills Demonstrated
 
-- ✅ Cloud threat detection engineering
+**Detection & Analytics:**
+- ✅ Cloud threat detection engineering (Sentinel + Defender for Endpoint)
 - ✅ KQL analytics and query optimization
-- ✅ Sysmon + AMA log analysis
 - ✅ MITRE ATT&CK framework application
-- ✅ Sentinel analytics rule creation
-- ✅ Investigation & triage workflows
+- ✅ Multi-source correlation with ASIM
+- ✅ UEBA behavioral analytics
+- ✅ Custom detection rule development (MDE + Sentinel)
+
+**Security Automation:**
+- ✅ SOAR workflow design and implementation (Logic Apps)
+- ✅ Automated incident containment
+- ✅ Content Hub solution deployment
+- ✅ Managed identity configuration
+
+**Threat Hunting & Investigation:**
+- ✅ Hypothesis-driven threat hunting methodology
+- ✅ Workbook development for operational efficiency
+- ✅ Hunt-to-rule promotion workflows
+- ✅ Incident investigation and triage
 - ✅ Attack simulation and validation
-- ✅ Incident documentation and reporting
+- ✅ Sysmon + AMA log analysis
 
 ### 🔮 Planned Enhancements
 
-- [ ] Additional MITRE-aligned detections (Key Vault, VM Metadata)
-- [ ] Behavioral analytics Jupyter Notebook
-- [ ] Automated threat hunting queries
+- [x] Additional MITRE-aligned detections (Key Vault, VM Metadata)
+- [x] Behavioral analytics
+- [x] Automated threat hunting queries
 - [ ] Sentinel-as-Code export (YAML rules)
-- [ ] Integration with SOAR playbooks
-- [ ] Custom workbooks for detection coverage
+- [x] Integration with SOAR playbooks
+- [x] Custom workbooks for detection coverage
 
 ---
 
@@ -152,6 +171,7 @@ This landing zone implements Azure security best practices while remaining cost-
 | **[Landing Zone Overview](projects/project-b-landing-zone-lite/landing-zone-lite.md)** | Architecture principles and components | ✅ Complete |
 | **[Networking Deep Dive](projects/project-b-landing-zone-lite/networking.md)** | Detailed network configuration | ✅ Complete |
 | **[Troubleshooting Guide](projects/project-b-landing-zone-lite/troubleshooting.md)** | Common issues and resolutions | ✅ Complete |
+| **[Hybrid AD Setup](projects/project-b-landing-zone-lite/hybrid-ad-setup.md)** | On-premises DC with Entra Connect sync | ✅ Complete |
 | **[Architecture Diagram](docs/architecture/lzl-architecture.md)** | Visual architecture with Mermaid | ✅ Complete |
 
 ### 🔧 IaC Implementations
@@ -160,13 +180,6 @@ This landing zone implements Azure security best practices while remaining cost-
 |------------|----------|--------|
 | **Bicep Modules** | [`/infra/bicep/`](infra/bicep/) | ✅ Core Networking Module Complete |
 | **Terraform** | [`/infra/terraform/`](infra/terraform/) | 🟦 Planned |
-
-**Planned Modules:**
-- Network (VNet, Subnets, NSGs, NAT Gateway)
-- Bastion (Secure administrative access)
-- Compute (Management VMs with AMA)
-- Monitoring (Log Analytics, Sentinel, DCRs)
-- Security (Key Vault, diagnostic settings)
 
 ### 🛡 Security Features
 
@@ -367,11 +380,13 @@ flowchart LR
 | Metric | Count |
 |--------|-------|
 | Completed Projects | 2/3 |
-| Active Detections | 2 operational + 4 templates |
-| Documentation Pages | 13 |
+| Active Detections | 7 Sentinel + 5 MDE + 5 Hunts |
+| Automation Playbooks | 5 operational Logic Apps |
+| Documentation Pages | 21 |
 | Architecture Diagrams | 2 |
 | Scripts | 2 |
-| Lab Case Studies | 2 |
+| Lab Case Studies | 2 initial + 3 playbook case studies |
+| Workbooks | 4 operational dashboards |
 
 ### Certification Alignment
 
@@ -400,7 +415,7 @@ flowchart LR
 
 ### Future Vision (Q2 2026+)
 - [ ] Multi-region architecture
-- [ ] Advanced SOAR playbooks
+- [x] Advanced SOAR playbooks
 - [ ] ML-based anomaly detection
 - [ ] Compliance automation
 - [ ] Public speaking/blog series
@@ -455,5 +470,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-*Last Updated: December 2025*  
+*Last Updated: January 2026*  
 *Portfolio Version: 1.0*
