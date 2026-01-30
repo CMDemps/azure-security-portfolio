@@ -11,7 +11,7 @@ Deployed and configured Microsoft Defender for Endpoint across a hybrid environm
 | dc01.corp.local | Windows Server 2022 VM (VMware) | Domain Controller | ✅ Onboarded |
 | mdemps-thinkpad | Physical laptop | Testing device | ✅ Onboarded |
 
-**Screenshot:** [Device inventory showing all 3 devices]
+![Device inventory showing all 3 devices](images/Assets_Device_List.png)
 
 ## Custom Detection Rules
 
@@ -45,6 +45,7 @@ DeviceProcessEvents
 
 **Testing:** Generated encoded PowerShell command on ws01.corp.local - detection triggered successfully.
 
+![Powershell encoding](images/mde-incident-example.png)
 ---
 
 ### Detection Rule 2: Credential Dumping Attempts
@@ -147,6 +148,7 @@ DeviceProcessEvents
 
 **Testing:** Ran multiple net commands on ws01.corp.local within 5 minutes - detection triggered successfully.
 
+![Network Recon](images/mdi-mde-incident-example.png)
 ---
 
 ## Key Learnings
