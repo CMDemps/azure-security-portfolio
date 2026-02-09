@@ -138,9 +138,9 @@ A comprehensive cloud detection engineering environment featuring:
 | [Lab 02 — Suspicious Process Creation](projects/project-a-cloud-detection-lab/labs/lab-02-process-creation.md) | T1059.001 PowerShell execution analysis | ✅ Complete |
 | [Lab 03 — AWS-Sentinel Multi-Cloud Detection](projects/project-a-cloud-detection-lab/labs/lab-03-aws-sentinel-integration.md) | AWS CloudTrail integration, 4 cross-cloud detection rules | ✅ Complete |
 | [Defender for Endpoint](projects/project-a-cloud-detection-lab/defender-for-endpoint.md) | 3 devices, 5 custom detection rules | ✅ Complete |
-| [Automation Playbooks](projects/project-a-cloud-detection-lab/automation-playbooks.md) | 5 Logic Apps SOAR workflows | ✅ Complete |
+| [Automation Playbooks](projects/project-a-cloud-detection-lab/automation-playbooks.md) | 6 Logic Apps SOAR workflows | ✅ Complete |
 | [Playbook Case Studies](projects/project-a-cloud-detection-lab/playbooks/) | 3 detailed automation implementations | ✅ Complete |
-| [Analytics Rules](projects/project-a-cloud-detection-lab/detections.md) | 7+ Sentinel detection rules | ✅ Complete |
+| [Analytics Rules](projects/project-a-cloud-detection-lab/detections.md) | 11+ Sentinel detection rules | ✅ Complete |
 | [Workbooks](projects/project-a-cloud-detection-lab/workbooks.md) | 4 investigation and hunting dashboards | ✅ Complete |
 | [Threat Hunting Queries](projects/project-a-cloud-detection-lab/hunting-queries.md) | 5 hypothesis-driven hunts | ✅ Complete |
 
