@@ -1,6 +1,6 @@
 # 🛡️ Azure Cloud Security Portfolio
 
-## DevSecOps • Cloud Security Engineering • Threat Detection
+## Threat Detection • Cloud Security Engineering • DevSecOps
 
 ![Azure](https://img.shields.io/badge/Azure-0078D4?style=for-the-badge&logo=microsoftazure&logoColor=white)
 ![Bicep](https://img.shields.io/badge/Bicep-3A76F0?style=for-the-badge&logo=azurepipelines&logoColor=white)
@@ -82,7 +82,10 @@ This portfolio demonstrates proficiency in:
 ## ⭐ Highlights
 
 - ✅ Built a full cloud threat detection lab using Sysmon + Log Analytics  
-- ✅ Developed 20+ KQL detections mapped to MITRE ATT&CK  
+- ✅ Developed 20+ KQL detections mapped to MITRE ATT&CK
+- ✅ Integrated AWS CloudTrail with Microsoft Sentinel for multi-cloud threat detection
+- ✅ Built cross-cloud correlation joining AWS and Azure data on source IP
+- ✅ Automated Slack incident notifications via Logic App SOAR playbook
 - ✅ Created secure IaC deployments using Bicep & Terraform  
 - ✅ Implemented DevSecOps pipelines with CodeQL, tfsec & Checkov  
 - ✅ Automated Azure deployments using GitHub Actions + OIDC (no secrets!)  
@@ -100,8 +103,8 @@ This portfolio demonstrates proficiency in:
 A comprehensive cloud detection engineering environment featuring:
 
 - **Defender for Endpoint**: 3 onboarded devices with 5 custom detection rules
-- **Microsoft Sentinel**: 7+ analytics rules with MITRE ATT&CK mapping
-- **SOAR Automation**: 5 Logic Apps playbooks for incident response
+- **Microsoft Sentinel**: 11+ analytics rules with MITRE ATT&CK mapping
+- **SOAR Automation**: 6 Logic Apps playbooks for incident response
 - **Threat Hunting**: 5 hypothesis-driven KQL hunting queries
 - **Workbooks**: 4 operational dashboards for analysis and investigation
 - **Azure Log Analytics**: Centralized log aggregation and analysis
@@ -110,7 +113,7 @@ A comprehensive cloud detection engineering environment featuring:
 ### 🎯 Security Operations Capabilities
 
 **Detection & Response:**
-- 7+ Sentinel analytics rules (credential access, privilege escalation, UEBA)
+- 11+ Sentinel analytics rules (credential access, privilege escalation, UEBA, AWS threat detection, cross-cloud correlation)
 - 5 Defender for Endpoint custom detections (T1059, T1003, T1021, T1547, T1087)
 - ASIM-based multi-source brute force detection
 - Behavioral analytics with UEBA
@@ -133,6 +136,7 @@ A comprehensive cloud detection engineering environment featuring:
 |----------|-------------|--------|
 | [Lab 01 — RDP Brute Force Detection](projects/project-a-cloud-detection-lab/labs/lab-01-bruteforce-detection.md) | T1110 credential access detection and investigation | ✅ Complete |
 | [Lab 02 — Suspicious Process Creation](projects/project-a-cloud-detection-lab/labs/lab-02-process-creation.md) | T1059.001 PowerShell execution analysis | ✅ Complete |
+| [Lab 03 — AWS-Sentinel Multi-Cloud Detection](projects/project-a-cloud-detection-lab/labs/lab-03-aws-sentinel-integration.md) | AWS CloudTrail integration, 4 cross-cloud detection rules | ✅ Complete |
 | [Defender for Endpoint](projects/project-a-cloud-detection-lab/defender-for-endpoint.md) | 3 devices, 5 custom detection rules | ✅ Complete |
 | [Automation Playbooks](projects/project-a-cloud-detection-lab/automation-playbooks.md) | 5 Logic Apps SOAR workflows | ✅ Complete |
 | [Playbook Case Studies](projects/project-a-cloud-detection-lab/playbooks/) | 3 detailed automation implementations | ✅ Complete |
@@ -149,6 +153,9 @@ View the complete architecture diagram and technical details:
 
 **Detection & Monitoring:**
 - Microsoft Sentinel (SIEM/SOAR)
+- AWS CloudTrail (via S3/SQS integration)
+- Cross-cloud threat correlation (AWS + Azure)
+- Defender for Cloud CSPM (multi-cloud posture)
 - Defender for Endpoint (EDR)
 - Windows Security Events (4624, 4625, 4688)
 - Sysmon (Event IDs 1, 3, 7, 11)
@@ -171,6 +178,9 @@ View the complete architecture diagram and technical details:
 **Detection Engineering:**
 - Cloud threat detection with Sentinel and Defender for Endpoint
 - KQL query development and optimization
+- Multi-cloud SIEM integration (AWS CloudTrail + Sentinel)
+- Cross-cloud threat correlation using KQL joins
+- CloudTrail JSON parsing and nested field extraction
 - MITRE ATT&CK framework mapping
 - Multi-source correlation with ASIM
 - Behavioral analytics (UEBA) implementation
