@@ -21,6 +21,8 @@ Each detection includes:
 
 - [Credential Access (TA0006)](credential-access-ta0006)
 - [Execution (TA0002)](execution-ta0002)
+- [AWS Threat Detection](aws-threat-detection)
+- [Behavioral Analytics (TA0009)](behavior-analytics-ta0009)
 - [Discovery (TA0007)](discovery-ta0007)
 - [Lateral Movement (TA0008)](lateral-movement-ta0008)
 - [Defense Evasion (TA0005)](defense-evasion-ta0005)
@@ -338,6 +340,269 @@ Event
 - DevOps pipelines or software installers pulling content from URLs
 - Admin activities using BITS or WebClient APIs
 - Base64/Encoded commands used for benign automation (rare)
+
+---
+
+## AWS Threat Detection
+
+### **T1098 — AWS IAM Rapid Privilege Escalation**
+
+**Status:** Implemented as Sentinel Analytics Rule  
+**File:** `lab-03-aws-sentinel-integration.md`
+
+#### Purpose
+
+Detect 3 or more IAM privilege modification events from the same identity within a 5-minute window, indicating potential credential compromise followed by privilege escalation.
+
+#### Log Sources
+
+- `AWSCloudTrail` (CloudTrail via S3/SQS connector)
+- EventSource: `iam.amazonaws.com`
+
+#### KQL
+
+```kql
+// Purpose: Detect rapid IAM privilege changes indicating credential compromise
+// MITRE ATT&CK: T1098 - Account Manipulation (Persistence)
+let PrivilegeChangeEvents = dynamic([
+    "AttachUserPolicy", "AttachRolePolicy", "AttachGroupPolicy",
+    "PutUserPolicy", "PutRolePolicy", "PutGroupPolicy",
+    "CreatePolicyVersion", "AddUserToGroup", "CreateUser",
+    "DetachUserPolicy", "DetachRolePolicy", "DeleteUser"
+]);
+AWSCloudTrail
+| where EventSource == "iam.amazonaws.com"
+| where EventName in (PrivilegeChangeEvents)
+| where isempty(ErrorCode)
+| summarize 
+    ChangeCount = count(),
+    ActionsPerformed = make_set(EventName),
+    FirstChange = min(TimeGenerated),
+    LastChange = max(TimeGenerated)
+    by UserIdentityArn, SourceIpAddress, bin(TimeGenerated, 5m)
+| where ChangeCount >= 3
+```
+
+#### MITRE Mapping
+
+- **Tactic:** Persistence
+- **Technique:** T1098 — Account Manipulation
+
+#### Notes / False Positives
+
+- Legitimate admin onboarding new team members
+- Automated provisioning (Terraform, CloudFormation)
+- Scheduled access reviews
+
+**Tuning:** Exclude known automation IAM roles, adjust threshold during onboarding periods
+
+---
+
+### **T1496 — Cryptojacking GPU Instance Launch**
+
+**Status:** Implemented as Sentinel Analytics Rule  
+**File:** `lab-03-aws-sentinel-integration.md`
+
+#### Purpose
+
+Detect launch of GPU, ML-accelerator, or high-compute EC2 instance types commonly abused for cryptocurrency mining. Single-event threshold because legitimate GPU launches have a near-zero base rate.
+
+#### Log Sources
+
+- `AWSCloudTrail` (CloudTrail via S3/SQS connector)
+- EventSource: `ec2.amazonaws.com`
+
+#### KQL
+
+```kql
+// Purpose: Detect GPU/ML instance launches commonly used for crypto mining
+// MITRE ATT&CK: T1496 - Resource Hijacking (Impact)
+let CryptoMiningInstanceTypes = dynamic([
+    "p3.", "p4.", "p4d.", "p5.", 
+    "g4dn.", "g4ad.", "g5.", "g5g.", "g6.",
+    "dl1.", "inf1.", "inf2.", "trn1."
+]);
+AWSCloudTrail
+| where EventSource == "ec2.amazonaws.com"
+| where EventName == "RunInstances"
+| where isempty(ErrorCode)
+| extend InstanceType = tostring(parse_json(RequestParameters).instanceType)
+| where InstanceType has_any (CryptoMiningInstanceTypes)
+| project 
+    TimeGenerated,
+    UserIdentityArn,
+    SourceIpAddress,
+    InstanceType,
+    AWSRegion,
+    RequestParameters
+```
+
+#### MITRE Mapping
+
+- **Tactic:** Impact
+- **Technique:** T1496 — Resource Hijacking
+
+#### Notes / False Positives
+
+- Legitimate ML/AI workloads using GPU instances
+- Approved data science teams
+
+**Tuning:** Maintain allowlist of approved GPU users, add custom detail for team validation
+
+---
+
+### **T1530 — S3 Bucket Public Access Protections Removed**
+
+**Status:** Implemented as Sentinel Analytics Rule  
+**File:** `lab-03-aws-sentinel-integration.md`
+
+#### Purpose
+
+Detect when S3 bucket public access block protections are disabled or when bucket ACL/policy changes could expose data publicly. Filters to only alert when protections are removed (boolean values set to false), ignoring re-enablement events.
+
+#### Log Sources
+
+- `AWSCloudTrail` (CloudTrail via S3/SQS connector)
+- EventSource: `s3.amazonaws.com`
+
+#### KQL
+
+```kql
+// Purpose: Detect removal of S3 public access block protections
+// MITRE ATT&CK: T1530 - Data from Cloud Storage (Collection)
+let S3ExposureEvents = dynamic([
+    "PutBucketAcl", "PutBucketPolicy", 
+    "PutBucketPublicAccessBlock", "DeleteBucketPublicAccessBlock",
+    "PutBucketCors"
+]);
+AWSCloudTrail
+| where EventSource == "s3.amazonaws.com"
+| where EventName in (S3ExposureEvents)
+| where isempty(ErrorCode)
+| extend BucketName = tostring(parse_json(RequestParameters).bucketName)
+| extend PublicAccessConfig = parse_json(RequestParameters).PublicAccessBlockConfiguration
+| extend BlockPublicAcls = tostring(PublicAccessConfig.BlockPublicAcls)
+| extend BlockPublicPolicy = tostring(PublicAccessConfig.BlockPublicPolicy)
+| extend RestrictPublicBuckets = tostring(PublicAccessConfig.RestrictPublicBuckets)
+| extend IgnorePublicAcls = tostring(PublicAccessConfig.IgnorePublicAcls)
+| where BlockPublicAcls == "false" 
+    or BlockPublicPolicy == "false" 
+    or RestrictPublicBuckets == "false" 
+    or IgnorePublicAcls == "false"
+    or EventName in ("PutBucketAcl", "PutBucketPolicy", "DeleteBucketPublicAccessBlock")
+| project 
+    TimeGenerated,
+    EventName,
+    UserIdentityArn,
+    SourceIpAddress,
+    BucketName,
+    BlockPublicAcls,
+    BlockPublicPolicy,
+    RestrictPublicBuckets,
+    IgnorePublicAcls,
+    AWSRegion
+```
+
+#### MITRE Mapping
+
+- **Tactic:** Collection
+- **Technique:** T1530 — Data from Cloud Storage
+
+#### Notes / False Positives
+
+- Intentional public buckets for static website hosting
+- CDN origin configurations
+- Honeypot deployments
+
+**Tuning:** Implement bucket allowlist, start with alert-only before enabling auto-remediation
+
+**Key Discovery:** CloudTrail logs this as `PutBucketPublicAccessBlock`, not `PutPublicAccessBlock`. Always validate event names against live data.
+
+---
+
+### **T1078 — Multi-Cloud Suspicious AWS Activity with Azure Failed Logins**
+
+**Status:** Implemented as Sentinel Analytics Rule  
+**File:** `lab-03-aws-sentinel-integration.md`
+
+#### Purpose
+
+Correlate IP addresses across AWS CloudTrail and Azure SigninLogs to detect attackers operating in both cloud environments simultaneously. Joins suspicious AWS write operations with failed Azure sign-in attempts from the same source IP within a 1-hour window.
+
+#### Log Sources
+
+- `AWSCloudTrail` (CloudTrail via S3/SQS connector)
+- `SigninLogs` (Entra ID sign-in logs)
+
+#### KQL
+
+```kql
+// Purpose: Cross-cloud correlation of suspicious AWS activity with Azure failed logins
+// MITRE ATT&CK: T1078 - Valid Accounts (Initial Access)
+let timewindow = 1h;
+let SuspiciousAWSEvents = dynamic([
+    "AttachUserPolicy", "AttachRolePolicy", "CreateUser",
+    "RunInstances", "PutBucketPublicAccessBlock", "DeleteBucketPublicAccessBlock",
+    "PutBucketPolicy", "PutBucketAcl", "CreateAccessKey",
+    "PutRolePolicy", "CreatePolicyVersion"
+]);
+let AWSSuspicious = 
+    AWSCloudTrail
+    | where TimeGenerated > ago(timewindow)
+    | where EventName in (SuspiciousAWSEvents)
+    | where isempty(ErrorCode)
+    | summarize 
+        AWSEventCount = count(),
+        AWSActions = make_set(EventName, 10),
+        AWSFirstSeen = min(TimeGenerated),
+        AWSLastSeen = max(TimeGenerated)
+        by SourceIpAddress;
+let AzureFailedLogins =
+    SigninLogs
+    | where TimeGenerated > ago(timewindow)
+    | where ResultType != "0"
+    | summarize
+        FailedLoginCount = count(),
+        TargetedUsers = make_set(UserPrincipalName, 5),
+        AzureApps = make_set(AppDisplayName, 5),
+        AzureFirstSeen = min(TimeGenerated),
+        AzureLastSeen = max(TimeGenerated)
+        by IPAddress;
+AWSSuspicious
+| join kind=inner AzureFailedLogins on $left.SourceIpAddress == $right.IPAddress
+| project
+    SourceIpAddress,
+    AWSEventCount,
+    AWSActions,
+    AWSFirstSeen,
+    AWSLastSeen,
+    FailedLoginCount,
+    TargetedUsers,
+    AzureApps,
+    AzureFirstSeen,
+    AzureLastSeen
+```
+
+#### MITRE Mapping
+
+- **Tactic:** Initial Access
+- **Technique:** T1078 — Valid Accounts
+
+#### Alert Enrichment
+
+**Custom Details:**
+- AWSActions: List of suspicious AWS operations performed
+- TargetedUsers: Azure accounts targeted with failed logins
+
+**Entity Mapping:**
+- IP: SourceIpAddress
+
+#### Notes / False Positives
+
+- Legitimate users working in both clouds from same corporate IP
+- VPN exit nodes shared across teams
+
+**Tuning:** Filter to only suspicious AWS write operations (not reads), narrow time window, exclude known corporate IP ranges
 
 ---
 
