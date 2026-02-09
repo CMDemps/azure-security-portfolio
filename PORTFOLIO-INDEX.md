@@ -314,33 +314,6 @@ Security-integrated CI/CD pipelines using GitHub Actions + Azure OIDC for automa
 - Workload Identity Federation
 - No stored secrets or service principals
 
-### 📊 Pipeline Architecture (Planned)
-
-```mermaid
-flowchart TD
-    A[Git Push/PR] --> B{Trigger Type}
-    
-    B -->|Pull Request| C[Pre-Merge Checks]
-    B -->|Main Branch| D[Deploy Pipeline]
-    
-    C --> C1[Linting]
-    C --> C2[Security Scan]
-    C --> C3[Unit Tests]
-    C --> C4{All Pass?}
-    C4 -->|No| C5[Block Merge]
-    C4 -->|Yes| C6[Approve Merge]
-    
-    D --> D1[Security Gates]
-    D1 --> D2[OIDC Auth]
-    D2 --> D3[Deploy to Dev]
-    D3 --> D4[Integration Tests]
-    D4 --> D5{Tests Pass?}
-    D5 -->|No| D6[Rollback]
-    D5 -->|Yes| D7[Deploy to Prod]
-    D7 --> D8[Post-Deploy Validation]
-    D8 --> D9[Update Documentation]
-```
-
 ### 🛠 Skills to be Demonstrated
 
 - [ ] CI/CD pipeline design and implementation
@@ -495,5 +468,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-*Last Updated: January 2026*  
+*Last Updated: February 2026*  
 *Portfolio Version: 1.0*
