@@ -47,12 +47,15 @@ A complete cloud detection engineering environment using:
 |--------------|-------------------|-----------------|
 | Credential Access (TA0006) | T1110 - Brute Force, T1003 - Credential Dumping | 2 Sentinel + 1 MDE |
 | Execution (TA0002) | T1059.001 - PowerShell | 1 Sentinel + 1 MDE |
-| Persistence (TA0003) | T1098 - Account Manipulation, T1547 - Registry Run Keys, T1543 - Service Creation | 3 Sentinel + 1 MDE |
+| Persistence (TA0003) | T1098 - Account Manipulation, T1547 - Registry Run Keys, T1543 - Service Creation, T1098 - AWS IAM Privilege Escalation | 4 Sentinel + 1 MDE |
 | Privilege Escalation (TA0004) | T1098.003 - Additional Cloud Roles | 2 Sentinel |
 | Lateral Movement (TA0008) | T1021.002 - SMB/Windows Admin Shares | 1 MDE |
 | Discovery (TA0007) | T1087 - Account Discovery | 1 MDE |
 | Behavioral Analytics (TA0009) | Multi-source detection, UEBA | 2 Sentinel |
-| **Total Active Detections** | | **7 Sentinel + 5 MDE + 5 Hunts** |
+| Impact (TA0040) | T1496 - Resource Hijacking (Cryptojacking) | 1 Sentinel |
+| Collection (TA0009) | T1530 - Data from Cloud Storage (S3 Exposure) | 1 Sentinel |
+| Initial Access (TA0001) | T1078 - Valid Accounts (Cross-Cloud Correlation) | 1 Sentinel |
+| **Total Active Detections** | | **11 Sentinel + 5 MDE + 5 Hunts** |
 
 ### 📖 Key Files & Documentation
 
@@ -60,6 +63,7 @@ A complete cloud detection engineering environment using:
 |----------|-------------|--------|
 | **[Lab 01 — RDP Brute Force Detection](projects/project-a-cloud-detection-lab/labs/lab-01-bruteforce-detection.md)** | Credential access attack detection case study | ✅ Complete |
 | **[Lab 02 — Suspicious Process Creation](projects/project-a-cloud-detection-lab/labs/lab-02-process-creation.md)** | PowerShell execution detection and investigation | ✅ Complete |
+| **[Lab 03 — AWS-Sentinel Multi-Cloud Detection](projects/project-a-cloud-detection-lab/labs/lab-03-aws-sentinel-integration.md)** | AWS CloudTrail integration, 4 cross-cloud detections | ✅ Complete |
 | **[Defender for Endpoint](projects/project-a-cloud-detection-lab/defender-for-endpoint.md)** | 3 devices, 5 custom detection rules, testing validation | ✅ Complete |
 | **[Automation Playbooks](projects/project-a-cloud-detection-lab/automation-playbooks.md)** | 5 Logic Apps SOAR workflows overview | ✅ Complete |
 | **[Playbook Case Studies](projects/project-a-cloud-detection-lab/playbooks/)** | 3 detailed automation implementations | ✅ Complete |
@@ -93,6 +97,17 @@ A complete cloud detection engineering environment using:
 - Base64 encoding, `-EncodedCommand`
 - In-memory execution patterns (`IEX`)
 
+#### Lab 03: AWS-Sentinel Multi-Cloud Threat Detection
+**MITRE Techniques:** T1098 - Account Manipulation, T1496 - Resource Hijacking, T1530 - Data from Cloud Storage, T1078 - Valid Accounts
+**Log Source:** AWSCloudTrail (via S3/SQS), SigninLogs
+**Status:** 4 Operational Sentinel rules
+
+**Detection Capabilities:**
+- IAM privilege escalation (3+ changes in 5-minute window)
+- Cryptojacking GPU instance launches (single-event alerting)
+- S3 bucket public access protection removal (filtered for dangerous state changes)
+- Cross-cloud correlation joining AWS CloudTrail and Azure SigninLogs on source IP
+
 ### 🛠 Skills Demonstrated
 
 **Detection & Analytics:**
@@ -102,6 +117,14 @@ A complete cloud detection engineering environment using:
 - ✅ Multi-source correlation with ASIM
 - ✅ UEBA behavioral analytics
 - ✅ Custom detection rule development (MDE + Sentinel)
+
+**Multi-Cloud Detection:**
+- ✅ AWS CloudTrail integration via S3/SQS pipeline
+- ✅ Cross-cloud threat correlation (AWS + Azure)
+- ✅ CloudTrail JSON parsing with parse_json() and nested field extraction
+- ✅ Cross-table joins using let subqueries and join kind=inner
+- ✅ SOAR Slack notification with alert-level data extraction
+- ✅ Cloud Security Posture Management (Defender for Cloud CSPM)
 
 **Security Automation:**
 - ✅ SOAR workflow design and implementation (Logic Apps)
@@ -380,19 +403,20 @@ flowchart LR
 | Metric | Count |
 |--------|-------|
 | Completed Projects | 2/3 |
-| Active Detections | 7 Sentinel + 5 MDE + 5 Hunts |
-| Automation Playbooks | 5 operational Logic Apps |
-| Documentation Pages | 21 |
+| Active Detections | 11 Sentinel + 5 MDE + 5 Hunts |
+| Automation Playbooks | 6 operational Logic Apps |
+| Documentation Pages | 22 |
 | Architecture Diagrams | 2 |
 | Scripts | 2 |
-| Lab Case Studies | 2 initial + 3 playbook case studies |
+| Lab Case Studies | 3 initial + 3 playbook case studies |
 | Workbooks | 4 operational dashboards |
+
 
 ### Certification Alignment
 
 | Certification | Coverage | Projects |
 |--------------|----------|----------|
-| **SC-200** (Security Operations) | 85% | Projects A, B |
+| **SC-200** (Security Operations) | 90% | Projects A, B |
 | **AZ-500** (Security Engineer) | 70% | Projects B, C |
 | **SC-100** (Cybersecurity Architect) | 60% | Projects B, C |
 
@@ -431,6 +455,7 @@ flowchart LR
 ### Implementation Guides
 - [Lab 01: RDP Brute Force](projects/project-a-cloud-detection-lab/labs/lab-01-bruteforce-detection.md)
 - [Lab 02: Process Creation](projects/project-a-cloud-detection-lab/labs/lab-02-process-creation.md)
+- [Lab 03: AWS Sentinel Integration](projects/project-a-cloud-detection-lab/labs/lab-03-aws-sentinel-integration.md)
 - [Detection Pack](projects/project-a-cloud-detection-lab/detections.md)
 - [Landing Zone Overview](projects/project-b-landing-zone-lite/landing-zone-lite.md)
 - [Networking Guide](projects/project-b-landing-zone-lite/networking.md)
