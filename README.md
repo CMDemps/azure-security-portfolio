@@ -382,46 +382,58 @@ flowchart LR
 ```text
 azure-security-portfolio/
 │
-├─ README.md                          # This file
-├─ PORTFOLIO-INDEX.md                 # Central project index
-├─ LICENSE                            # MIT License
-├─ .gitignore                         # Git ignore rules
+├─ README.md
+├─ PORTFOLIO-INDEX.md
+├─ LICENSE
+├─ .gitignore
 │
-├─ docs/                              # Documentation root
-│   ├─ architecture/                  # Architecture diagrams & docs
-│   │   ├─ ctd-lab-architecture.md    # Project A architecture
-│   │   └─ lzl-architecture.md        # Project B architecture
-│   └─ images/                        # Documentation images
+├─ .github/
+│   └─ copilot-instructions.md
+│
+├─ docs/
+│   ├─ architecture/
+│   │   ├─ ctd-lab-architecture.md
+│   │   └─ lzl-architecture.md
+│   └─ images/
 │       ├─ cost-management.png
 │       ├─ lab-01-brute-force-detection.png
 │       ├─ lab-02-process-creation.png
 │       └─ rg-sc200-lab-topology.png
 │
-├─ infra/                             # Infrastructure-as-Code
-│   ├─ bicep/                         # Bicep modules (planned)
-│   └─ terraform/                     # Terraform configs (planned)
+├─ infra/
+│   ├─ bicep/
+│   │   └─ landing-zone-lite/
+│   │       └─ main-01.bicep
+│   └─ terraform/
+│       └─ .gitkeep
 │
-├─ projects/                          # Project implementations
-│   │
-│   ├─ project-a-cloud-detection-lab/     # Project A
-│   │   ├─ labs/                          # Lab case studies
+├─ projects/
+│   ├─ project-a-cloud-detection-lab/
+│   │   ├─ labs/
 │   │   │   ├─ lab-01-bruteforce-detection.md
-│   │   │   └─ lab-02-process-creation.md
-│   │   └─ detections.md                  # Detection pack
+│   │   │   ├─ lab-02-process-creation.md
+│   │   │   └─ lab-03-aws-sentinel-integration.md
+│   │   ├─ playbooks/
+│   │   │   ├─ playbook-01-revoke-user-signin.md
+│   │   │   ├─ playbook-02-high-severity-notification.md
+│   │   │   └─ playbook-03-content-hub-block-user.md
+│   │   ├─ images/
+│   │   ├─ automation-playbooks.md
+│   │   ├─ defender-for-endpoint.md
+│   │   ├─ detections.md
+│   │   ├─ hunting-queries.md
+│   │   └─ workbooks.md
 │   │
-│   ├─ project-b-landing-zone-lite/       # Project B
-│   │   ├─ images/                        # Project-specific images
-│   │   │   └─ lz-lite-network.png
-│   │   ├─ landing-zone-lite.md           # LZ overview
-│   │   ├─ networking.md                  # Network details
-│   │   └─ troubleshooting.md             # Common issues
-│   │
-│   └─ project-c-devsecops-pipelines/     # Project C (planned)
-│       └─ (Coming soon)
+│   └─ project-b-landing-zone-lite/
+│       ├─ images/
+│       ├─ hybrid-ad-setup.md
+│       ├─ landing-zone-lite.md
+│       ├─ networking.md
+│       └─ troubleshooting.md
 │
-└─ scripts/                           # Automation scripts
-    ├─ install-ama.ps1                # AMA installation script
-    └─ install-sysmon.ps1             # Sysmon installation script
+└─ scripts/
+    ├─ install-ama.ps1
+    └─ install-sysmon.ps1
 ```
 
 ---
